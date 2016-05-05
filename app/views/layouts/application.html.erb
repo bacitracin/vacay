@@ -14,7 +14,8 @@
 
 <%= yield %>
 
-  <% if user_signed_in? %>
+  <% if user_signed_in? %><br><br>
+    <%= link_to('Create a new trip', new_trip_path) %><br>
     <%= link_to('Log Out', destroy_user_session_path, :method => :delete) %>      
   <% end %>
 
