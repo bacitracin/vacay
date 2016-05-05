@@ -11,15 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160505183220) do
+ActiveRecord::Schema.define(version: 20160505184245) do
 
   create_table "attractions", force: :cascade do |t|
     t.integer  "trip_id"
+    t.integer  "destination_id"
     t.string   "type"
     t.string   "url"
     t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "destinations", force: :cascade do |t|
+    t.string   "name"
+    t.string   "city"
+    t.string   "country"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string   "review_title"
+    t.integer  "rating"
+    t.text     "review"
+    t.integer  "attraction_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "trips", force: :cascade do |t|
