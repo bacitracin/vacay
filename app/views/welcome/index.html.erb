@@ -1,0 +1,9 @@
+<h2>Welcome!</h2>
+
+<p> Vacay helps you easily plan and share your trips </p>
+
+
+<% if !user_signed_in? %>
+  <%= link_to('Log In', new_user_session_path)  %> <br>
+  <%= link_to('Sign Up', new_user_registration_path)  %>  
+<% end %>
