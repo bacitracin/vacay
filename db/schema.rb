@@ -44,8 +44,8 @@ ActiveRecord::Schema.define(version: 20160505184245) do
     t.integer  "user_id"
     t.string   "trip_nickname"
     t.string   "destination_id"
-    t.date     "start_date"
-    t.date     "end_date"
+    t.string   "start_date"
+    t.string   "end_date"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
