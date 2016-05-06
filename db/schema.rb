@@ -13,37 +13,16 @@
 
 ActiveRecord::Schema.define(version: 20160505203250) do
 
-  create_table "attractions", force: :cascade do |t|
-    t.integer  "trip_id"
-    t.integer  "destination_id"
-    t.string   "attraction_type"
-    t.string   "url"
-    t.string   "description"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
   create_table "destinations", force: :cascade do |t|
-    t.string   "name"
     t.string   "city"
-    t.string   "country"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "reviews", force: :cascade do |t|
-    t.string   "review_title"
-    t.integer  "rating"
-    t.text     "review"
-    t.integer  "attraction_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
-
   create_table "trips", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "trip_nickname"
     t.string   "destination_id"
+    t.string   "trip_nickname"
     t.string   "start_date"
     t.string   "end_date"
     t.datetime "created_at",     null: false

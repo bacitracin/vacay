@@ -1,7 +1,8 @@
 class Destination < ActiveRecord::Base
   has_many :trips
-  has_many :attractions
-  has_many :reviews, :through => :attractions
+
+  validates :city, presence: true
+  validates :city, uniqueness: true
 
   def trips_attributes=(trip_attributes)
     trips_attributes.each do |trip_attributes| 
