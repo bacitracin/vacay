@@ -1,37 +1,20 @@
-<%= form_for(@destination) do |f| %>
-  <%= f.label :city %>
-  <%= f.text_field :city %><br>
-<%= f.submit "Create City"%>
+<%= form_for(@destination) do |destination_builder| %>
+  <%= destination_builder.label :city %>
+  <%= destination_builder.text_field :city %><br>
+
+
+  <%= destination_builder.fields_for :trips do |trip_builder| %>
+    <%= trip_builder.label :trip_nickname %>
+    <%= trip_builder.text_field :trip_nickname %><br>
+
+    <%= trip_builder.label :start_date %>
+    <%= trip_builder.text_field :start_date %><br>
+
+    <%= trip_builder.label :end_date %>
+    <%= trip_builder.text_field :end_date %><br>
+  <% end %>
+
+<%= destination_builder.submit %>
+
 <% end %>
 
-
-
-
- <!-- <label>Existing City By Name</label>
-<input type= "text" name = "">
- -->
-<!-- </fieldset><br>
-
-<fieldset>
-
-<label>Or Create a City By Name</label>
-<input type= "text" name = "">
-
-</fieldset><br>
-
-
-<fieldset>
-  <legend>Trip</legend>
-
-  <label>Trip Nickname</label>
-  <input type="text" name="">
-
-  <label>Start Date</label>
-  <input type="text" name="">
-
-  <label>End Date</label>
-  <input type="text" name="">
-
-</fieldset>
-<input type="submit">
-<form> -->

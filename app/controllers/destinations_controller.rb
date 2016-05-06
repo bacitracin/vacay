@@ -1,4 +1,5 @@
 class DestinationsController < ApplicationController
+before_action :authenticate_user!, except: [:index, :show]
 
   def index
     @destinations = Destination.all
@@ -6,13 +7,17 @@ class DestinationsController < ApplicationController
 
   def new
     @destination = Destination.new
-    @trip = @destination.trips.build()
+    @destination.trips.build(:user_id => current_user.id)
+
   end
 
   def create
-    raise params.inspect
-    @destination = Destination.create(destination_params)
-    redirect_to @destination
+    @destination = Destination.new(destination_params)
+    if @destination.save
+      redirect_to @destination
+    else
+      render :new
+    end
   end
 
   def show
@@ -22,7 +27,7 @@ class DestinationsController < ApplicationController
   private
 
   def destination_params
-    params.require(:destination).permit(:city, :id, :trip_params => [:trip_nickname, :start_date, :end_date])
+    params.require(:destination).permit(:city, :id, :trips_attributes => [:trip_nickname, :start_date, :end_date, :user_id])
   end
 
 end

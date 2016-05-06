@@ -37,3 +37,15 @@ end
 class Review < ActiveRecord::Base
   belongs_to :attraction
 end
+
+
+params = {
+  :destination => {
+    :city => "Charlotte"
+  }
+  :trip => {
+    :trip_nickname => "Southern Charm",
+    :start_date => "10/10/16",
+    :end_date => "10/15/16"
+  }
+}
