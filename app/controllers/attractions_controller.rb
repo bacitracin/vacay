@@ -1,2 +1,0 @@
-class AttractionsContoller < ApplicationController
-end

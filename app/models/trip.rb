@@ -6,3 +6,4 @@ class Trip < ActiveRecord::Base
   has_many :reviews, :through => :attractions
   
 end
+ 
