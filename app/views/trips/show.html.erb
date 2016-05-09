@@ -1,5 +1,7 @@
-<h2>Trip Information</h2>
+<h2> Trip Information </h2>
 
-<%= @trip.trip_nickname %><br>
+<h3><b><%= @trip.trip_nickname %></b></h3>
 
-<%= @trip.start_date %> to <%= @trip.end_date %>
+is from <%= @trip.start_date %> to <%= @trip.end_date %><br>
+
+<br><%= link_to "Delete This Trip", trips_path, method: :delete, data: { confirm: "Really?" } %></li>

@@ -7,8 +7,7 @@ before_action :authenticate_user!, except: [:index, :show]
 
   def new
     @destination = Destination.new
-    @destination.trips.build(:user_id => current_user.id)
-
+    @trip = @destination.trips.build(:user_id => current_user.id)
   end
 
   def create
@@ -21,7 +20,25 @@ before_action :authenticate_user!, except: [:index, :show]
   end
 
   def show
+     @destination = Destination.find(params[:id])
+  end
+
+  def edit
     @destination = Destination.find(params[:id])
+  end
+
+  def update
+    if @destination.update(destination_params)
+      redirect_to @destination
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    Destination.find_by_id(params[:id]).destroy
+
+    redirect_to destinations_path
   end
 
   private

@@ -1,0 +1,19 @@
+<%= form_for @trip do |f| %>
+
+  <%= f.label :trip_nickname %>
+  <%= f.text_field :trip_nickname %><br>
+
+  <%= f.label :start_date %>
+  <%= f.text_field :start_date %><br>
+
+  <%= f.label :end_date %>
+  <%= f.text_field :end_date %><br>
+
+  <%= f.fields_for :destinations do |p| %>
+    <%= p.label :city %>
+    <%= p.text_field :city %><br><br>
+  <% end %>
+
+<%= f.submit "Create a Trip" %>
+<% end %>
+
