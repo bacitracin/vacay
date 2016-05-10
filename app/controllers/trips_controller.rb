@@ -1,5 +1,5 @@
 class TripsController < ApplicationController
-  # before_action :authenticate_user!
+   before_action :authenticate_user!
 
   def index
     @trips = current_user.trips
@@ -9,17 +9,17 @@ class TripsController < ApplicationController
     @trip = current_user.trips.build()
   end
 
-    def create
-      @trip = current_user.trips.build(trip_params)
-      @destination = Destination.find_or_create_by(:city => params[:trip][:destination][:destination_city])
-      @trip.destination_id = @destination.id
-      @destination.trips << @trip
-      if @trip.valid?
-        @trip.save
-        redirect_to @trip
-      else
-        render :new
-      end
+  def create
+    @trip = current_user.trips.build(trip_params)
+    @destination = Destination.find_or_create_by(:city => params[:trip][:destination][:destination_city])
+    @trip.destination_id = @destination.id
+    @destination.trips << @trip 
+    if @trip.valid?
+      @trip.save
+      redirect_to @trip
+    else
+     render :new
+     end
     end
 
    def show
@@ -28,14 +28,14 @@ class TripsController < ApplicationController
 
    def edit
      @trip = Trip.find_by_id(params[:id])
+     if @trip.user_id != current_user.id
+      flash[:notice] = "Sorry you can only edit your own trips"
+    end
+
    end
 
    def update
-     if @trip.update(trip_params)
-       redirect_to @trip
-     else   
-       render :edit
-     end
+     @trip = Trip.find_by_id(params[:id])
    end
 
    def destroy

@@ -7,4 +7,6 @@
 
 from <b><%= @trip.start_date %></b> to <b><%= @trip.end_date %></b><br><br>
 
+<%= link_to "Edit This Trip", edit_trip_path(@trip) %>
+
 <br><%= link_to "See All Your Trips", user_trips_path(current_user) %>

@@ -1,0 +1,5 @@
+<h2>All Trips, All Users</h2>
+
+<% @trips.each do |trip| %>
+  <li><%= link_to trip.trip_nickname, trip_path(trip) %> - <%= link_to trip.user.email, user_path(trip.user) %> is going to <%= link_to trip.destination.city, destination_path(trip.destination) %></li><br>
+<% end %>

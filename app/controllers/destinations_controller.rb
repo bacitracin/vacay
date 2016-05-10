@@ -1,5 +1,5 @@
 class DestinationsController < ApplicationController
-# before_action :authenticate_user!, except: [:index, :show]
+ before_action :authenticate_user!, except: [:index, :show]
 
   def index
      @destinations = Destination.all
@@ -7,7 +7,6 @@ class DestinationsController < ApplicationController
 
   def new
     @destination = Destination.new
-    #@trip = @destination.trips.build(:user_id => current_user.id, :destination_id => @destination.id)
   end
 
    def create
@@ -28,10 +27,13 @@ class DestinationsController < ApplicationController
    end
 
    def update
+     @destination = Destination.find(params[:id])
      if @destination.update(destination_params)
+       flash[:notice] = "Destination successfully updated"
        redirect_to @destination
      else
-       render :edit
+       render :edit 
+       flash[:notice] = "Destination can't be blank. Please try again."
      end
    end
 
@@ -46,7 +48,6 @@ class DestinationsController < ApplicationController
    def destination_params
      params.require(:destination).permit(:city)
    end
-   #:trips_attributes => [:trip_nickname, :start_date, :end_date, :user_id])
-   
+
 
 end

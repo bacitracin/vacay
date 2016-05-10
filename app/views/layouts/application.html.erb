@@ -10,9 +10,7 @@
 
 <h1> Vacay </h1>
   <% if user_signed_in? %><br>
-    Hi, <%= current_user.email %>!
-    <% else %>
-    Hello there Guest!
+    You are signed in as <b><%= current_user.email %></b>
   <% end %>
 
   <p class="notice"><%= notice %></p>
@@ -24,7 +22,8 @@
     <%= link_to('Add a New Trip', new_user_trip_path(current_user))%> or <%= link_to('New Destination', new_destination_path) %><br>
  
     <%= link_to('See All Destinations', destinations_path) %><br>
-    <%= link_to('See Your Trips', user_trips_path(current_user)) %><br>
+
+    <%= link_to('See All Your Trips', user_trips_path(current_user)) %><br>
     <%= link_to('Log Out', destroy_user_session_path, :method => :delete) %>      
   <% end %>
 
