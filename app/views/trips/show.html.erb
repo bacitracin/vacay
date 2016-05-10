@@ -2,8 +2,8 @@
 
 <h3><b><%= @trip.trip_nickname %></b></h3>
 
-is from <%= @trip.start_date %> to <%= @trip.end_date %><br>
+is from <b><%= @trip.start_date %></b> to <b><%= @trip.end_date %></b><br><br>
 
-<%= @trip.destination.city %>
+in <b><%= @trip.destination.city %></b><br>
 
 <br><%= link_to "See All Your Trips", user_trips_path(current_user) %>
