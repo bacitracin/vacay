@@ -27,15 +27,28 @@ class TripsController < ApplicationController
    end
 
    def edit
-     @trip = Trip.find_by_id(params[:id])
-     if @trip.user_id != current_user.id
+     if Trip.find_by_id(params[:id]).user_id != current_user.id
       flash[:notice] = "Sorry you can only edit your own trips"
+    else
+      @trip = Trip.find_by_id(params[:id])
+      @destination = Destination.find_by_id(@trip.destination.id)
     end
 
    end
 
    def update
-     @trip = Trip.find_by_id(params[:id])
+    if Trip.find_by_id(params[:id]).user_id != current_user.id
+      flash[:notice] = "Sorry you can only edit your own trips"
+    else
+      @trip = Trip.find_by_id(params[:id])
+      @destination = Destination.find_by_id(@trip.destination.id)
+      if @trip.update(trip_params)
+        @destination = Destination.find_or_create_by(:city => params[:trip][:destination][:destination_city])
+        @trip.destination_id = @destination.id
+        @destination.trips << @trip 
+        redirect_to @trip
+      end
+    end
    end
 
    def destroy
