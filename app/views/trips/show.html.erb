@@ -4,6 +4,6 @@
 
 is from <b><%= @trip.start_date %></b> to <b><%= @trip.end_date %></b><br><br>
 
-in <b><%= @trip.destination.city %></b><br>
+in <b><%= link_to @trip.destination.city, destination_path(@trip.destination) %></b><br>
 
 <br><%= link_to "See All Your Trips", user_trips_path(current_user) %>

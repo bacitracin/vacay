@@ -2,17 +2,6 @@
    <%= destination_builder.label :city %>
    <%= destination_builder.text_field :city %><br><br>
 
- <%= destination_builder.fields_for :trips do |trip_builder| %>
-   <%= trip_builder.label :trip_nickname %>
-   <%= trip_builder.text_field :trip_nickname %><br>
-
-   <%= trip_builder.label :start_date %>
-   <%= trip_builder.text_field :start_date %><br>
-
-   <%= trip_builder.label :end_date %>
-   <%= trip_builder.text_field :end_date %><br><br>
-   <% end %>
-
- <%= destination_builder.submit "Create Trip" %>
+ <%= destination_builder.submit "Create New City" %>
 
  <% end %>
