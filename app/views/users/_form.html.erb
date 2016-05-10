@@ -1,0 +1,16 @@
+<%= form_for(@user) do |f| %>
+
+   <%= f.label :username %>
+   <%= f.text_field :username%><br>
+
+   <%= f.label :hometown %>
+   <%= f.text_field :hometown %><br>
+
+   <%= f.label :age %>
+   <%= f.text_field :age %><br>
+
+   <%= f.label :info %>
+   <%= f.text_area :info %><br>
+
+ <%= f.submit %>
+ <% end %>

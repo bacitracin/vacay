@@ -53,6 +53,7 @@ class TripsController < ApplicationController
 
    def destroy
      Trip.find_by_id(params[:id]).destroy
+     flash[:notice] = "Trip was deleted"
      redirect_to user_trips_path(current_user)
    end
 
