@@ -2,8 +2,9 @@
 
 <h3><b><%= @trip.trip_nickname %></b></h3>
 
-is from <b><%= @trip.start_date %></b> to <b><%= @trip.end_date %></b><br><br>
+<%= link_to @trip.user.email, user_path(@trip.user) %> is going to 
+<b><%= link_to @trip.destination.city, destination_path(@trip.destination) %></b><br><br>
 
-in <b><%= link_to @trip.destination.city, destination_path(@trip.destination) %></b><br>
+from <b><%= @trip.start_date %></b> to <b><%= @trip.end_date %></b><br><br>
 
 <br><%= link_to "See All Your Trips", user_trips_path(current_user) %>
