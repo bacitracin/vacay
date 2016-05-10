@@ -4,4 +4,6 @@
 
 is from <%= @trip.start_date %> to <%= @trip.end_date %><br>
 
-<br><%= link_to "Delete This Trip", trips_path, method: :delete, data: { confirm: "Really?" } %></li>
+<%= @trip.destination.city %>
+
+<br><%= link_to "See All Your Trips", user_trips_path(current_user) %>
