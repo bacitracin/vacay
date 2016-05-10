@@ -1,0 +1,19 @@
+<%= form_for(@attraction) do |f| %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :attraction_type %>
+  <%= f.text_field :attraction_type %>
+
+  <%= f.label :url %>
+  <%= f.text_field :url %>
+
+  <%= f.fields_for :destination do |p| %>
+    <%= p.label :destination_city %>
+    <%= p.text_field :destination_city %><br> 
+  <% end %>
+
+<%= f.submit%>
+
+<% end %>

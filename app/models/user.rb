@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
 
   has_many :trips
   has_many :destinations, :through => :trips
+  has_many :attractions, :through => :trips
 
   # def self.from_omniauth(auth)
   #     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

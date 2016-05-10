@@ -1,8 +1,6 @@
-class Trip < ActiveRecord::Base
-
-  belongs_to :user
+class Attraction < ActiveRecord::Base
   belongs_to :destination
-  has_many :attractions
+  belongs_to :trip
 
   def destination_city=(city)
     self.destination.city = Destination.find_or_create_by(city: city)
