@@ -6,3 +6,5 @@
 <b>City:  </b><%= @attraction.destination.city %><br></b>
 
 <%= link_to "Edit this Attraction", edit_attraction_path(@attraction) %>
+
+<%= link_to "Delete this Attraction", @attraction, method: :delete, data: { confirm: "Confirm"} %></li>

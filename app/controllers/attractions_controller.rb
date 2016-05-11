@@ -29,6 +29,27 @@ class AttractionsController < ApplicationController
     @attraction = Attraction.find_by_id(params[:id])
   end
 
+  def edit
+    @attraction = Attraction.find_by_id(params[:id])
+  end
+  
+  def update
+    @attraction = Attraction.find_by_id(params[:id])
+    if @attraction.update(attraction_params)
+      flash[:notice] = "Attraction successfully updated"
+      redirect_to @attraction
+    else
+      render :edit 
+      flash[:notice] = "Oops somethign went wrong. Please try again."
+    end
+  end
+
+  def destroy
+    Attraction.find_by_id(params[:id]).destroy
+    flash[:notice] = "Attraction was deleted"
+    redirect_to user_trips_path(current_user)
+  end
+
   private
 
   def attraction_params
