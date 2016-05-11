@@ -13,12 +13,6 @@
     <%= p.label :destination_city %>
     <%= p.text_field :destination_city %><br> 
   <% end %>
-
-  <%= f.fields_for :trip do |p| %>
-    <%= p.label :trip_nickname %>
-    <%= p.text_field :trip_nickname %><br> 
-  <% end %>
-
 <%= f.submit%>
 
 <% end %>

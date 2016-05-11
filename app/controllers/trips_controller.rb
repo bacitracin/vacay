@@ -29,6 +29,7 @@ class TripsController < ApplicationController
    def edit
      if Trip.find_by_id(params[:id]).user_id != current_user.id
       flash[:notice] = "Sorry you can only edit your own trips"
+      redirect_to user_trips_path(current_user)
     else
       @trip = Trip.find_by_id(params[:id])
       @destination = Destination.find_by_id(@trip.destination.id)
@@ -39,6 +40,7 @@ class TripsController < ApplicationController
    def update
     if Trip.find_by_id(params[:id]).user_id != current_user.id
       flash[:notice] = "Sorry you can only edit your own trips"
+      redirect_to :index
     else
       @trip = Trip.find_by_id(params[:id])
       @destination = Destination.find_by_id(@trip.destination.id)
@@ -47,6 +49,8 @@ class TripsController < ApplicationController
         @trip.destination_id = @destination.id
         @destination.trips << @trip 
         redirect_to @trip
+      else
+        render :edit
       end
     end
    end
