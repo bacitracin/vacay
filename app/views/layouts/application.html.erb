@@ -19,7 +19,7 @@
 <%= yield %>
 
   <% if user_signed_in? %><br><br>
-    <%= link_to('Add a New Trip', new_user_trip_path(current_user))%> or <%= link_to('New Destination', new_destination_path) %><br>
+    <%= link_to('Add a New Trip', new_user_trip_path(current_user))%> or <%= link_to('New Destination', new_destination_path) %> or <%= link_to('New Attraction', new_attraction_path) %><br>
  
     <%= link_to('See All Destinations', destinations_path) %><br>
 
