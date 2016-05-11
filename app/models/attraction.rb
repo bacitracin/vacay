@@ -10,8 +10,7 @@ class Attraction < ActiveRecord::Base
   def trip_nickname=(trip_nickname)
     @trip = Trip.find_or_create_by(trip_nickname: trip_nickname)
     @trip.attractions << self
-    @trip.save
     self.trips << @trip
-    self.save
   end
+  
 end
