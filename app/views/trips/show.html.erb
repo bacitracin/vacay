@@ -10,8 +10,10 @@ from <b><%= @trip.start_date %></b> to <b><%= @trip.end_date %></b><br><br>
 <%= link_to "Edit This Trip", edit_trip_path(@trip) %>
 
 <h3>Things to Do in <%= @trip.destination.city%> </h3>
-<%= @trip.attractions.each do |attraction| %>
-  <li><%= link_to attraction.name, attraction_path(attraction) %></li>
-<% end %>
+
+  <%= @trip.attractions.each do |attraction| %>
+    <li><%= link_to attraction.name, attraction %></li>
+  <% end %>
+
 
 <br><%= link_to "See All Your Trips", user_trips_path(current_user) %>

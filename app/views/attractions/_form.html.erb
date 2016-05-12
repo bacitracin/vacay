@@ -7,16 +7,20 @@
   <%= f.text_field :attraction_type %><br>
 
   <%= f.label :url %>
-  <%= f.text_field :url %><br>
+  <%= f.text_field :url %><br><br>
 
   <%= f.fields_for :destination do |p| %>
     <%= p.label :destination_city %>
     <%= p.text_field :destination_city %><br> 
-  <% end %>
+  <% end %><br>
 
   <%= f.fields_for :trip do |p| %>
     <%= p.label :trip_nickname %>
     <%= p.text_field :trip_nickname %><br> 
+    <%= p.label :start_date %>
+    <%= p.text_field :start_date %><br> 
+    <%= p.label :end_date %>
+    <%= p.text_field :end_date %><br> 
   <% end %>
 <%= f.submit%>
 

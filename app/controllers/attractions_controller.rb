@@ -9,20 +9,19 @@ class AttractionsController < ApplicationController
   end
 
   def create
-    @attraction = Attraction.create(attraction_params)
-
     @destination = Destination.find_or_create_by(:city => params[:attraction][:destination][:destination_city])
-    @attraction.destination_id = @destination.id
+    @attraction = @destination.attractions.create(attraction_params)
 
-    @trip = Trip.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname])
+    @trip = Trip.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname],:start_date=> params[:attraction][:trip][:start_date], :end_date=> params[:attraction][:trip][:end_date])
+    @trip.destination_id = @destination.id
     @attraction.trips << @trip
 
     if @attraction.valid?
-      @attraction.save
       redirect_to @attraction
     else
       render :new
     end
+
   end
 
   def show
