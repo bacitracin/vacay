@@ -2,17 +2,17 @@
 
 <h3><b><%= @trip.trip_nickname %></b></h3>
 
-<%= link_to @trip.user.email, user_path(@trip.user) %> is going to 
+<%= link_to @trip.user.username, user_path(@trip.user) %> is going to 
 <b><%= link_to @trip.destination.city, destination_path(@trip.destination) %></b><br><br>
 
 from <b><%= @trip.start_date %></b> to <b><%= @trip.end_date %></b><br><br>
 
 <%= link_to "Edit This Trip", edit_trip_path(@trip) %>
 
-<h3>Things to Do in <%= @trip.destination.city%> </h3>
+<h3>My <%= @trip.destination.city%> To Do List</h3>
 
-  <%= @trip.attractions.each do |attraction| %>
-    <li><%= link_to attraction.name, attraction %></li>
+  <% @trip.attractions.each do |attraction| %>
+    <%= link_to attraction.name, attraction %>
   <% end %>
 
 

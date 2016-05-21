@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-before_action :authenticate_user!, except: [:index, :show]
+before_action :authenticate_user!, except: [:index, :show] # decide whether to keep this or not
 
   def new
     @user = current_user
@@ -20,18 +20,18 @@ before_action :authenticate_user!, except: [:index, :show]
      end
   end
 
-  def index
+  def index # See all members of Vacay
     @users = User.all
   end
 
-  def show
+  def show  # User profile pages
     @user = User.find(params[:id])
   end 
 
-  private
+ private
 
   def user_params
-    params.require(:user).permit(:username, :age, :hometown, :info, :email, :password, :password_confirmation)
+    params.require(:user).permit(:username, :age, :hometown, :info, :email, :password, :password_confirmation) 
   end
 
 end

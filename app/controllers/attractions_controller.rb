@@ -1,4 +1,7 @@
 class AttractionsController < ApplicationController
+  # Should I add validations???
+  # currently no safeguard against duplication
+  #also users can create attractions and add them on to trips that they do not own!!! s
 
   def index
     @attractions = Attraction.all
@@ -10,13 +13,13 @@ class AttractionsController < ApplicationController
 
   def create
     @destination = Destination.find_or_create_by(:city => params[:attraction][:destination][:destination_city])
-    @attraction = @destination.attractions.create(attraction_params)
+    @attraction = @destination.attractions.create(attraction_params) #why not build???
 
     @trip = Trip.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname],:start_date=> params[:attraction][:trip][:start_date], :end_date=> params[:attraction][:trip][:end_date])
     @trip.destination_id = @destination.id
     @attraction.trips << @trip
 
-    if @attraction.valid?
+    if @attraction.valid? # wait wtf, why not save???? 
       redirect_to @attraction
     else
       render :new
@@ -38,8 +41,8 @@ class AttractionsController < ApplicationController
       flash[:notice] = "Attraction successfully updated"
       redirect_to @attraction
     else
+      flash[:notice] = "Oops something went wrong. Please try again."
       render :edit 
-      flash[:notice] = "Oops somethign went wrong. Please try again."
     end
   end
 
@@ -52,7 +55,7 @@ class AttractionsController < ApplicationController
   private
 
   def attraction_params
-    params.require(:attraction).permit(:name,:url, :attraction_type, :destination_city, :trip_nickname)
+    params.require(:attraction).permit(:name, :url, :attraction_type, :destination_city, :trip_nickname)
   end
 
 end

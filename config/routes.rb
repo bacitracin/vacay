@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   resources :attractions
-  devise_for :users 
+  devise_for :users#,  :path => 'u'
 
   root to: "welcome#index"
   resources :destinations

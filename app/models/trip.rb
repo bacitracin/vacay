@@ -5,6 +5,8 @@ class Trip < ActiveRecord::Base
   has_many :trip_attractions
   has_many :attractions, :through => :trip_attractions
 
+  # add validation for city
+
   def destination_city=(city)
     self.destination.city = Destination.find_or_create_by(city: city)
   end
