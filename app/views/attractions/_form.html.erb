@@ -14,6 +14,7 @@
     <%= p.text_field :destination_city %><br> 
   <% end %><br>
 
+  Add this to a trip? Optional<br>
   <%= f.fields_for :trip do |p| %>
     <%= p.label :trip_nickname %>
     <%= p.text_field :trip_nickname %><br> 
@@ -26,3 +27,4 @@
 <%= f.submit%>
 
 <% end %>
+

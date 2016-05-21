@@ -33,10 +33,14 @@ class AttractionsController < ApplicationController
 
   def edit
     @attraction = Attraction.find_by_id(params[:id])
+    @destination = @attraction.destination
   end
   
   def update
     @attraction = Attraction.find_by_id(params[:id])
+    @destination = @attraction.destination
+    @trip = Trip.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname],:start_date=> params[:attraction][:trip][:start_date], :end_date=> params[:attraction][:trip][:end_date])
+    @attraction.trips << @trip
     if @attraction.update(attraction_params)
       flash[:notice] = "Attraction successfully updated"
       redirect_to @attraction

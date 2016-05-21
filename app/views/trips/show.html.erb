@@ -9,11 +9,11 @@ from <b><%= @trip.start_date %></b> to <b><%= @trip.end_date %></b><br><br>
 
 <%= link_to "Edit This Trip", edit_trip_path(@trip) %>
 
-<h3>My <%= @trip.destination.city%> To Do List</h3>
+<h3><%= @trip.destination.city%> To Do List</h3>
 
   <% @trip.attractions.each do |attraction| %>
-    <%= link_to attraction.name, attraction %>
+    <li><%= link_to attraction.name, attraction %>, <%= attraction.attraction_type %></li>
   <% end %>
 
 
-<br><%= link_to "See All Your Trips", user_trips_path(current_user) %>
+<br><br><%= link_to "See All Your Trips", user_trips_path(current_user) %>
