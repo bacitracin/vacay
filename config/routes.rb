@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   resources :attractions
-  devise_for :users#,  :path => 'u'
+  devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
 
   root to: "welcome#index"
   resources :destinations
