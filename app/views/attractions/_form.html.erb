@@ -17,7 +17,7 @@
   Optional: Add this to an existing trip?<br>
   <%= f.fields_for :trip do |p| %>
     <%= p.label :trip_nickname %>
-    <%= p.text_field :trip_nickname %><br> 
+    <%= collection_select(:attraction, :trip_attractions, current_user.trips, :id, :trip_nickname, prompt: true) %>
   <% end %>
   
 <%= f.submit%>
