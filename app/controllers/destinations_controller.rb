@@ -12,10 +12,8 @@ class DestinationsController < ApplicationController
   end
 
   def create
-    @destination = Destination.find_or_create_by(destination_params) # No dupes created
+    @destination = Destination.find_or_create_by(destination_params) # No dupes created 
     if @destination.valid?
-      @destination.save
-      flash[:notice] = "Destination successfully created" # !!!check that this doesn't show when it already exists
       redirect_to @destination # if found/created successfully, show the page
     else
       render :new

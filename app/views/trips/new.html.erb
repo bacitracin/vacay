@@ -1,3 +1,11 @@
+<% if @trip.errors.any? %>
+      <ul>
+        <% @trip.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+<% end %>
+
 <h3>Add a new Trip </h3>
 
 <%= render 'form' %>

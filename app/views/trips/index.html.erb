@@ -1,5 +1,14 @@
 <h2>See Your Trips</h2>
 
+<h3> Filter Your Trips: </h3>
+<%= form_tag('/trips', method: 'get') do %>
+  <%= select_tag 'date', options_for_select(["Upcoming", "Past"]), include_blank: false %>
+  <%= submit_tag "Filter" %>
+  <% end %>
+
+
+
+
 <% @trips.each do |trip| %>
   <li><%= link_to trip.trip_nickname, trip_path(trip) %>  <%= link_to "Delete", trip, method: :delete, data: { confirm: "Confirm"} %></li>
 <% end %>

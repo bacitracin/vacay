@@ -2,7 +2,8 @@ class Attraction < ActiveRecord::Base
   belongs_to :destination
   has_many :trip_attractions
   has_many :trips, :through => :trip_attractions
-  # add validation for city
+
+  validates_presence_of :name, :destination_id
 
   def destination_city=(city)
     self.destination.city = Destination.find_or_create_by(city: city)

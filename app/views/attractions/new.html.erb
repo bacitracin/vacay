@@ -1,4 +1,10 @@
 <h3>Add an Attraction</h3>
 <p> Attraction <b>MUST</b> include Destination City </p>
-
+<% if @attraction.errors.any? %>
+      <ul>
+        <% @attraction.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+<% end %>
 <%= render "form" %>

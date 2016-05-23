@@ -13,13 +13,13 @@ class AttractionsController < ApplicationController
 
   def create
     @destination = Destination.find_or_create_by(:city => params[:attraction][:destination][:destination_city])
-    @attraction = @destination.attractions.create(attraction_params) #why not build???
+    @attraction = @destination.attractions.create(attraction_params)
 
-    @trip = Trip.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname],:start_date=> params[:attraction][:trip][:start_date], :end_date=> params[:attraction][:trip][:end_date])
+    @trip = Trip.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname])
     @trip.destination_id = @destination.id
     @attraction.trips << @trip
 
-    if @attraction.valid? # wait wtf, why not save???? 
+    if @attraction.valid?
       redirect_to @attraction
     else
       render :new
@@ -39,7 +39,7 @@ class AttractionsController < ApplicationController
   def update
     @attraction = Attraction.find_by_id(params[:id])
     @destination = @attraction.destination
-    @trip = Trip.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname],:start_date=> params[:attraction][:trip][:start_date], :end_date=> params[:attraction][:trip][:end_date])
+    @trip = Trip.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname])
     @attraction.trips << @trip
     if @attraction.update(attraction_params)
       flash[:notice] = "Attraction successfully updated"

@@ -4,5 +4,9 @@ class Destination < ActiveRecord::Base
   has_many :attractions
 
   validates_presence_of :city
+
+  def self.popularity
+    self.trips.count
+  end
    
 end

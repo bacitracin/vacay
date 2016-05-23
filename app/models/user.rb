@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, 
          :omniauthable, :omniauth_providers => [:facebook]
 
-  #validates :email, uniqueness: true
+  # uniqueness & password length included in devise
 
   has_many :trips
   has_many :destinations, :through => :trips

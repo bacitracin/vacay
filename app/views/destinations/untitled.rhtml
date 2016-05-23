@@ -22,3 +22,12 @@
 <%= destination_form.submit %>
 
 <% end %>
+
+
+<% if @destination.errors.any? %>
+<ul>
+  <% @destination.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+</ul>
+<% end %>

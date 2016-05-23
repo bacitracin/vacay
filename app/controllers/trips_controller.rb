@@ -4,6 +4,12 @@ class TripsController < ApplicationController
    # trip is nested under user - user/1/trips/4
    # index is all of the user's trips. Doesn't really make sense for a user to see every freaking one's trip
   def index
+    if params[:date] == "Upcoming"
+      @trips = Trip.upcoming
+    elsif params[:date] == "Past"
+      @trips = Trip.past
+    end
+    # need to work on this
     @trips = current_user.trips
   end
 
@@ -17,10 +23,11 @@ class TripsController < ApplicationController
     @destination = Destination.find_or_create_by(:city => params[:trip][:destination][:destination_city]) 
     @trip.destination_id = @destination.id 
     @destination.trips << @trip # Got to tell destination that trip belongs to it
+    
     if @trip.valid?
       @trip.save
       # !!!check that this doesn't show when it already exists. you can create 2 trips with the same name, that's ok
-      flash[:notice] = "Trip successfully created" 
+      #flash[:notice] = "Trip successfully created" 
       redirect_to @trip
     else
      render :new
