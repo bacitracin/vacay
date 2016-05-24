@@ -2,9 +2,11 @@
 <b><h3><%= @destination.city %></h3></b><%= link_to "Edit this City", edit_destination_path(@destination) %>
 
 <h4>Related Trips</h4>
+
 <% @destination.trips.each do |trip| %>
   <li><%= link_to trip.trip_nickname, trip_path(trip) %> - <%= link_to trip.user.username, user_path(trip.user) %>'s Trip</li>
 <% end %>
+
 
 <h4>Attractions in <%= @destination.city %>:</h4>
 <% @destination.attractions.each do |attraction| %>

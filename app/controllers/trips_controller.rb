@@ -54,9 +54,7 @@ class TripsController < ApplicationController
       @trip = Trip.find_by_id(params[:id])
       @destination = Destination.find_by_id(@trip.destination.id)
       if @trip.update(trip_params)
-        @destination = Destination.find_or_create_by(:city => params[:trip][:destination][:destination_city])
-        @trip.destination_id = @destination.id
-        @destination.trips << @trip 
+        @destination.update(:city => params[:trip][:destination][:destination_city])
         redirect_to @trip
       else
         render :edit

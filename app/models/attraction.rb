@@ -12,8 +12,8 @@ class Attraction < ActiveRecord::Base
 
   def trip_nickname=(trip_nickname)
     @trip = current_user.trips.find_or_create_by(trip_nickname: trip_nickname)
-    #@trip.attractions << self # didnt i already add this?????
-    #self.trips << @trip # dupe code???
+    @trip.attractions << self # didnt i already add this?????
+    self.trips << @trip # dupe code???
   end
   
 end

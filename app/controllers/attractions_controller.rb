@@ -11,21 +11,21 @@ class AttractionsController < ApplicationController
   def create
     if (params[:attraction][:destination][:destination_city]) == ""
       @attraction = Attraction.create(attraction_params) #create so form is prefilled
+      @trip = Trip.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname])
       render :new
     else
       @destination = Destination.find_or_create_by(:city => params[:attraction][:destination][:destination_city])
       @attraction = @destination.attractions.create(attraction_params) #not sure if i want to change this to get rid of dupe
+      @trip = Trip.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname])
+      @trip.destination_id = @destination.id
+      @attraction.trips << @trip
+      
       if @attraction.valid?
         redirect_to @attraction
       else
         render :new
       end
     end
-
-   # separate out trip association into set_trip 
-   # @trip = Trip.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname])
-   # @trip.destination_id = @destination.id
-   # @attraction.trips << @trip
   end
 
   def show
