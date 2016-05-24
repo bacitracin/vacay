@@ -32,7 +32,7 @@ class DestinationsController < ApplicationController
 
   def update
     @destination = Destination.find(params[:id])
-    if @destination.update(destination_params) # !!!! CHECK WHAT THE UPDATE FUNCTION DOES
+    if @destination.update(destination_params)
       flash[:notice] = "Destination successfully updated"
       redirect_to @destination
     else
@@ -42,7 +42,7 @@ class DestinationsController < ApplicationController
   end
 
   def destroy
-    Destination.find_by_id(params[:id]).destroy # maybe add in option/error if the trip cannot be found 
+    Destination.find_by_id(params[:id]).destroy
     flash[:notice] = "Destination was deleted" 
     redirect_to destinations_path 
   end
@@ -50,7 +50,7 @@ class DestinationsController < ApplicationController
   private
 
   def destination_params
-    params.require(:destination).permit(:city) # so far, only attribute is the city name
+    params.require(:destination).permit(:city)
   end
 
 end

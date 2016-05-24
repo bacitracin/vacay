@@ -8,7 +8,7 @@ class Trip < ActiveRecord::Base
   validates_presence_of :trip_nickname, :destination_id
 
   def destination_city=(city)
-    self.destination.city = Destination.find_or_create_by(city: city)
+    self.destination = Destination.find_or_create_by(city: city)
   end
 
 end

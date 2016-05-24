@@ -12,23 +12,29 @@ class AttractionsController < ApplicationController
   end
 
   def create
-    @destination = Destination.find_or_create_by(:city => params[:attraction][:destination][:destination_city])
-    @attraction = @destination.attractions.create(attraction_params)
 
-    @trip = Trip.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname])
-    @trip.destination_id = @destination.id
-    @attraction.trips << @trip
-
-    if @attraction.valid?
-      redirect_to @attraction
-    else
+    if (params[:attraction][:destination][:destination_city]) == ""
+      @attraction = Attraction.create(attraction_params)
       render :new
+    else
+      @destination = Destination.find_or_create_by(:city => params[:attraction][:destination][:destination_city])
+      @attraction = @destination.attractions.create(attraction_params)
+      if @attraction.valid?
+        redirect_to @attraction
+      else
+        render :new
+      end
     end
+
+   # @trip = Trip.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname])
+   # @trip.destination_id = @destination.id
+   # @attraction.trips << @trip
 
   end
 
   def show
     @attraction = Attraction.find_by_id(params[:id])
+    @trip = Trip.find_or_create_by(params[:trip_nickname])
   end
 
   def edit
@@ -39,8 +45,7 @@ class AttractionsController < ApplicationController
   def update
     @attraction = Attraction.find_by_id(params[:id])
     @destination = @attraction.destination
-    @trip = Trip.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname])
-    @attraction.trips << @trip
+
     if @attraction.update(attraction_params)
       flash[:notice] = "Attraction successfully updated"
       redirect_to @attraction
@@ -48,6 +53,15 @@ class AttractionsController < ApplicationController
       flash[:notice] = "Oops something went wrong. Please try again."
       render :edit 
     end
+  end
+
+  def set_trip
+    @attraction = Attraction.find_by_id(params[:id])
+    @destination = @attraction.destination
+    @trip = Trip.find_or_create_by(params[:trip])
+    @trip.destination_id = @destination.id
+    @trip.attractions << @attraction
+    redirect_to @trip
   end
 
   def destroy
@@ -63,7 +77,6 @@ class AttractionsController < ApplicationController
   end
 
 end
-
 
 
   
