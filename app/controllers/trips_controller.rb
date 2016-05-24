@@ -1,20 +1,18 @@
 class TripsController < ApplicationController
    before_action :authenticate_user! #check this
-
    # trip is nested under user - user/1/trips/4
-   # index is all of the user's trips. Doesn't really make sense for a user to see every freaking one's trip
-  def index
+
+  def index #add in these two model methods, # need to work on this
     if params[:date] == "Upcoming"
       @trips = Trip.upcoming
     elsif params[:date] == "Past"
       @trips = Trip.past
     end
-    # need to work on this
     @trips = current_user.trips
   end
 
   def new
-    @trip = current_user.trips.build() # should i be using build or not? does build save to the db? 
+    @trip = current_user.trips.build() 
   end
 
   def create
@@ -22,12 +20,10 @@ class TripsController < ApplicationController
     # created 'destination_city custom attribute writer' in the trip model
     @destination = Destination.find_or_create_by(:city => params[:trip][:destination][:destination_city]) 
     @trip.destination_id = @destination.id 
-    @destination.trips << @trip # Got to tell destination that trip belongs to it
+    @destination.trips << @trip
     
     if @trip.valid?
       @trip.save
-      # !!!check that this doesn't show when it already exists. you can create 2 trips with the same name, that's ok
-      #flash[:notice] = "Trip successfully created" 
       redirect_to @trip
     else
      render :new
@@ -68,16 +64,16 @@ class TripsController < ApplicationController
     end
    end
 
-   def destroy
-     Trip.find_by_id(params[:id]).destroy # can I change this from find_by_id to just find????
-     flash[:notice] = "Trip was deleted" # maybe add in option/error if the trip cannot be found 
-     redirect_to user_trips_path(current_user)
-   end
+  def destroy
+    Trip.find_by_id(params[:id]).destroy 
+    flash[:notice] = "Trip was deleted" # maybe add in option/error if the trip cannot be found 
+    redirect_to user_trips_path(current_user)
+  end
 
-   private
+  private
 
-    def trip_params
-      params.require(:trip).permit(:trip_nickname, :id, :start_date, :end_date, :destination_city) # do i need ID here??? don't think so
-    end
+  def trip_params
+    params.require(:trip).permit(:trip_nickname, :start_date, :end_date, :destination_city) 
+  end
 
 end

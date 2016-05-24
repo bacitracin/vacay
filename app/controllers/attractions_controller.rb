@@ -1,7 +1,4 @@
 class AttractionsController < ApplicationController
-  # Should I add validations???
-  # currently no safeguard against duplication
-  #also users can create attractions and add them on to trips that they do not own!!! s
 
   def index
     @attractions = Attraction.all
@@ -12,13 +9,12 @@ class AttractionsController < ApplicationController
   end
 
   def create
-
     if (params[:attraction][:destination][:destination_city]) == ""
-      @attraction = Attraction.create(attraction_params)
+      @attraction = Attraction.create(attraction_params) #create so form is prefilled
       render :new
     else
       @destination = Destination.find_or_create_by(:city => params[:attraction][:destination][:destination_city])
-      @attraction = @destination.attractions.create(attraction_params)
+      @attraction = @destination.attractions.create(attraction_params) #not sure if i want to change this to get rid of dupe
       if @attraction.valid?
         redirect_to @attraction
       else
@@ -26,15 +22,14 @@ class AttractionsController < ApplicationController
       end
     end
 
+   # separate out trip association into set_trip 
    # @trip = Trip.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname])
    # @trip.destination_id = @destination.id
    # @attraction.trips << @trip
-
   end
 
   def show
     @attraction = Attraction.find_by_id(params[:id])
-    @trip = Trip.find_or_create_by(params[:trip_nickname])
   end
 
   def edit
@@ -47,7 +42,8 @@ class AttractionsController < ApplicationController
     @destination = @attraction.destination
 
     if @attraction.update(attraction_params)
-      flash[:notice] = "Attraction successfully updated"
+      @destination.update(:city => params[:attraction][:destination][:destination_city])
+      flash[:notice] = "Attraction details successfully updated"
       redirect_to @attraction
     else
       flash[:notice] = "Oops something went wrong. Please try again."
@@ -55,6 +51,8 @@ class AttractionsController < ApplicationController
     end
   end
 
+
+  #### CHECK THIS #####
   def set_trip
     @attraction = Attraction.find_by_id(params[:id])
     @destination = @attraction.destination

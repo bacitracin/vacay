@@ -2,7 +2,6 @@ class DestinationsController < ApplicationController
  before_action :authenticate_user!, except: [:index, :show] #check this
  # is this the correct before filter I want?
 
- # Users can see all destinations, esp to get new ideas
   def index
     @destinations = Destination.all
   end 
@@ -12,9 +11,9 @@ class DestinationsController < ApplicationController
   end
 
   def create
-    @destination = Destination.find_or_create_by(destination_params) # No dupes created 
+    @destination = Destination.find_or_create_by(destination_params) 
     if @destination.valid?
-      redirect_to @destination # if found/created successfully, show the page
+      redirect_to @destination
     else
       render :new
     end
