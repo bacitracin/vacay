@@ -1,5 +1,5 @@
 class DestinationsController < ApplicationController
- before_action :authenticate_user!, except: [:index, :show] #check this
+ before_action :authenticate_user!, except: [:index, :show] 
  # is this the correct before filter I want?
 
   def index
@@ -24,7 +24,7 @@ class DestinationsController < ApplicationController
     @destination = Destination.find(params[:id])
   end
 
-  # Anybody can edit the spelling of the destination city 
+  # Anybody can edit the spelling of the destination city directly
   def edit
     @destination = Destination.find(params[:id])
   end
@@ -41,7 +41,7 @@ class DestinationsController < ApplicationController
   end
 
   def destroy
-    Destination.find_by_id(params[:id]).destroy
+    Destination.find_by_id(params[:id]).destroy #decide if i want to bother updating trips error
     flash[:notice] = "Destination was deleted" 
     redirect_to destinations_path 
   end

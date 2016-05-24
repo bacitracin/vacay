@@ -3,17 +3,24 @@
 <h3><b><%= @trip.trip_nickname %></b></h3>
 
 <%= link_to @trip.user.username, user_path(@trip.user) %> is going to 
-<b><%= link_to @trip.destination.city, destination_path(@trip.destination) %></b><br><br>
+<% if @trip.destination %>
+  <b><%= link_to @trip.destination.city, destination_path(@trip.destination) %></b><br><br>
+<% end %>
 
+<% if @trip.start_date %>
 from <b><%= @trip.start_date %></b> to <b><%= @trip.end_date %></b><br><br>
+<% end %>
 
 <%= link_to "Edit This Trip", edit_trip_path(@trip) %>
 
+<% if @trip.destination %>
 <h3><%= @trip.destination.city%> To Do List</h3>
 
   <% @trip.attractions.each do |attraction| %>
     <li><%= link_to attraction.name, attraction %>, <%= attraction.attraction_type %></li>
   <% end %>
+
+<% end %>
 
 
 <br><br><%= link_to "See All Your Trips", user_trips_path(current_user) %>

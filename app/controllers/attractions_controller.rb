@@ -11,14 +11,18 @@ class AttractionsController < ApplicationController
   def create
     if (params[:attraction][:destination][:destination_city]) == ""
       @attraction = Attraction.create(attraction_params) #create so form is prefilled
-      @trip = Trip.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname])
+      @trip = current_user.trips.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname])
       render :new
     else
       @destination = Destination.find_or_create_by(:city => params[:attraction][:destination][:destination_city])
       @attraction = @destination.attractions.create(attraction_params) #not sure if i want to change this to get rid of dupe
-      @trip = Trip.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname])
-      @trip.destination_id = @destination.id
-      @attraction.trips << @trip
+      if (params[:attraction][:trip][:trip_nickname]) == ""
+        @trip = "N/A"
+      else
+        @trip = Trip.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname])
+        @trip.destination_id = @destination.id
+        @attraction.trips << @trip
+      end
       
       if @attraction.valid?
         redirect_to @attraction
@@ -42,7 +46,7 @@ class AttractionsController < ApplicationController
     @destination = @attraction.destination
 
     if @attraction.update(attraction_params)
-      @destination.update(:city => params[:attraction][:destination][:destination_city])
+      @destination.find_or_create_by(:city => params[:attraction][:destination][:destination_city]) #creating dupe instead of overwriting
       flash[:notice] = "Attraction details successfully updated"
       redirect_to @attraction
     else
