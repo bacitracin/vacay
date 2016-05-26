@@ -1,9 +1,9 @@
 <h2>See Your Trips</h2>
 
 <h3> Filter Your Trips: </h3>
-<%= form_tag('/trips', method: 'get') do %>
-  <%= select_tag 'date', options_for_select(["Upcoming", "Past"]), include_blank: false %>
-  <%= submit_tag "Filter" %>
+<%= form_tag('/index', method: 'get') do %>
+  <%= select_tag 'start_date', options_for_select(["Upcoming", "Past"])%>
+  <%= submit_tag "Filter", name: nil %>
 <% end %>
 
 <% @trips.each do |trip| %>

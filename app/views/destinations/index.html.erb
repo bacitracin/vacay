@@ -1,6 +1,7 @@
 <h2>See all Destinations</h2>
 
 <% @destinations.each do |destination| %>
+
   <ul>
     <li><%= link_to destination.city, destination_path(destination) %> <%= destination.popularity %> Trips Saved <%= link_to "Delete", destination, method: :delete, data: { confirm: "Delete?" } %></li>
   </ul>

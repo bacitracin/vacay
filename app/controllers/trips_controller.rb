@@ -4,9 +4,9 @@ class TripsController < ApplicationController
 
   def index #add in these two model methods, # need to work on this
     if params[:date] == "Upcoming"
-      @trips = Trip.upcoming
+      @trips = Trip.upcoming_trips
     elsif params[:date] == "Past"
-      @trips = Trip.past
+      @trips = Trip.past_trips
     end
     @trips = current_user.trips
   end
