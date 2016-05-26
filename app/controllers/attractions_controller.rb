@@ -10,17 +10,18 @@ class AttractionsController < ApplicationController
 
   def create
     if (params[:attraction][:destination][:destination_city]) == ""
-      @attraction = Attraction.create(attraction_params) #create so form is prefilled
+      @attraction = Attraction.create(attraction_params) #go ahead and create so form is prefilled for other fields
       @trip = current_user.trips.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname])
       render :new
     else
       @destination = Destination.find_or_create_by(:city => params[:attraction][:destination][:destination_city])
       @attraction = @destination.attractions.create(attraction_params) #not sure if i want to change this to get rid of dupe
       if (params[:attraction][:trip][:trip_nickname]) == ""
-        @trip = "N/A"
+        @trip = "N/A" #if there's no trip nickname just have blank for now
       else
-        @trip = Trip.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname])
+        @trip = current_user.trips.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname])
         @trip.destination_id = @destination.id
+        @destination.trips << @trip
         @attraction.trips << @trip
       end
       
@@ -44,11 +45,19 @@ class AttractionsController < ApplicationController
   def update
     @attraction = Attraction.find_by_id(params[:id])
     @destination = @attraction.destination
-
     if @attraction.update(attraction_params)
-      @destination.find_or_create_by(:city => params[:attraction][:destination][:destination_city]) #creating dupe instead of overwriting
-      flash[:notice] = "Attraction details successfully updated"
-      redirect_to @attraction
+      @destination = Destination.find_or_create_by(:city => params[:attraction][:destination][:destination_city]) #creating dupe instead of overwriting
+      @attraction.destination_id = @destination.id
+      @destination.attractions << @attraction
+      if (params[:attraction][:trip][:trip_nickname]) == ""
+        @trip = "N/A" #if there's no trip nickname just have blank for now
+      else
+        @trip = Trip.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname])
+       @trip.destination_id = @destination.id
+       @attraction.trips << @trip
+       flash[:notice] = "Attraction details successfully updated"
+       redirect_to @attraction
+     end
     else
       flash[:notice] = "Oops something went wrong. Please try again."
       render :edit 
