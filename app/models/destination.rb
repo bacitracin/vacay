@@ -10,4 +10,8 @@ class Destination < ActiveRecord::Base
     self.trips.count
   end
 
+  def self.popularity_sort
+    Destination.all.sort_by { |destination| destination.popularity}.reverse
+  end
+
 end
