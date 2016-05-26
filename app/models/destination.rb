@@ -5,8 +5,8 @@ class Destination < ActiveRecord::Base
 
   validates_presence_of :city
 
- # def self.popularity
- #   self.trips.count
- # end
+  def popularity
+    self.trips.count
+  end
    
 end
