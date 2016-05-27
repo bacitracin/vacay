@@ -63,7 +63,7 @@ class TripsController < ApplicationController
 
   def destroy
     @trip.destroy 
-    flash[:notice] = "Trip was deleted" # maybe add in option/error if the trip cannot be found 
+    flash[:notice] = "Trip was deleted"
     redirect_to user_trips_path(current_user)
   end
 
