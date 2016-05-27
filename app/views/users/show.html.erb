@@ -4,7 +4,15 @@
 <b>Hometown: </b> <%= @user.hometown %><br>
 <b>Age: </b><%= @user.age %><br>
 <b>Info: </b><%= @user.info %><br><br>
+
 <h4><%= @user.username %>'s Trips: </h4>
+
 <% @user.trips.each do |trip| %>
   <li><%= link_to trip.trip_nickname, trip_path(trip) %> in <%= link_to trip.destination.city, destination_path(trip.destination) %></li>
 <% end %>
+
+<br>
+<span class='st_email_large' displayText='Email'></span>
+<span class='st_twitter_large' displayText='Tweet'></span>
+<span class='st_facebook_large' displayText='Facebook'></span>
+<span class='st_pinterest_large' displayText='Pinterest'></span>

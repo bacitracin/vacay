@@ -1,3 +1,5 @@
+<h3>Add a New Destination City</h3>
+
 <% if @destination.errors.any? %>
       <ul>
         <% @destination.errors.full_messages.each do |message| %>
@@ -5,7 +7,5 @@
         <% end %>
       </ul>
 <% end %>
-
-<h3>Add a New Destination City</h3>
 
 <%= render "form" %>

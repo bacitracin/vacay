@@ -1,3 +1,5 @@
+<h3>Add a New Trip </h3>
+
 <% if @trip.errors.any? %>
       <ul>
         <% @trip.errors.full_messages.each do |message| %>
@@ -6,8 +8,7 @@
       </ul>
 <% end %>
 
-<h3>Add a new Trip </h3>
-
 <%= form_for([current_user, @trip]) do |f| %>  
   <%= render partial: 'form', locals: {f: f} %>
 <% end %>
+<%= f.submit %>

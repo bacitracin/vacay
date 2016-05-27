@@ -1,4 +1,4 @@
-<h2> Trip Information </h2>
+<h3> Trip Information </h3>
 
 <h3><b><%= @trip.trip_nickname %></b></h3>
 
@@ -22,6 +22,8 @@ from <b><%= @trip.start_date %></b> to <b><%= @trip.end_date %></b><br><br>
   <% end %>
 
 <% end %>
-
-
-<br><br><%= link_to "See All Your Trips", user_trips_path(current_user) %>
+<br>
+<span class='st_email_large' displayText='Email'></span>
+<span class='st_twitter_large' displayText='Tweet'></span>
+<span class='st_facebook_large' displayText='Facebook'></span>
+<span class='st_pinterest_large' displayText='Pinterest'></span>

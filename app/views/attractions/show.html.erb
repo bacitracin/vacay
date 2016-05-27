@@ -5,6 +5,16 @@
 <b>Attraction Type: </b><%= @attraction.attraction_type %><br>
 <b>City:  </b><%= @attraction.destination.city %><br></b><br>
 
-<%= link_to "Edit this Attraction", edit_attraction_path(@attraction) %><br>
+<h4> These people are interested in <%= @attraction.name %><br><br>
 
-<%= link_to "Delete this Attraction", @attraction, method: :delete, data: { confirm: "Confirm"} %></li><br>
+<% @attraction.trips.each do |trip| %>
+  <li><%= link_to trip.user.username, user_path(trip.user) %></li>
+<% end %>
+
+<br><%= link_to "Edit this Attraction", edit_attraction_path(@attraction) %><br>
+<%= link_to "Delete this Attraction", @attraction, method: :delete, data: { confirm: "Delete?"} %></li><br>
+
+<span class='st_email_large' displayText='Email'></span>
+<span class='st_twitter_large' displayText='Tweet'></span>
+<span class='st_facebook_large' displayText='Facebook'></span>
+<span class='st_pinterest_large' displayText='Pinterest'></span>

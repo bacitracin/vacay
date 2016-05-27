@@ -1,47 +1,53 @@
 <!DOCTYPE html>
-<html>
-<head>  
-<!-- Bootstrap CSS CDN -->
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <title>Vacay</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <html>
 
-<ul class="nav nav-pills">
-  <li role="presentation" class="dropdown active">
-  <% if user_signed_in? %>
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-      Trips <span class="caret"></span>
-    </a>
-    <ul class="dropdown-menu">
-      <li><%= link_to('See All Your Trips', user_trips_path(current_user)) %></li>
-      <li><%= link_to('Add a New Trip', new_user_trip_path(current_user))%> </li>
-    </ul>
-  <li role="presentation" class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-      Destinations <span class="caret"></span>
-    </a>
-    <ul class="dropdown-menu">
-      <li> <%= link_to('See All Destinations', destinations_path) %></li>
-      <li><%= link_to('New Destination', new_destination_path) %> </li>
-    </ul>
-  <li role="presentation" class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-      Attractions <span class="caret"></span>
-    </a>
-    <ul class="dropdown-menu">
-      <li><%= link_to('See All Attractions', attractions_path) %></li>
-      <li><%= link_to('New Attraction', new_attraction_path) %></li>
-    </ul>
+  <head>  
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+
+    <script type="text/javascript">var switchTo5x=true;</script>
+    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+    <script type="text/javascript">stLight.options({publisher: "33ef7225-b587-4dbf-8168-d0b0f32a443a", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+
+    <title>Vacay</title>
+  </head>
+
+  <body>
+  <ul class="nav nav-pills">
+    <li role="presentation" class="dropdown active">
+    <% if user_signed_in? %>
+    
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+        Trips <span class="caret"></span></a>
+      <ul class="dropdown-menu">
+        <li><%= link_to('See All Your Trips', user_trips_path(current_user)) %></li>
+        <li><%= link_to('Add a New Trip', new_user_trip_path(current_user))%> </li>
+      </ul>
+    
     <li role="presentation" class="dropdown">
       <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-        Your Account <span class="caret"></span>
-      </a>
+        Destinations <span class="caret"></span></a>
+      <ul class="dropdown-menu">
+        <li> <%= link_to('See All Destinations', destinations_path) %></li>
+        <li><%= link_to('New Destination', new_destination_path) %> </li>
+      </ul>
+    
+    <li role="presentation" class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+        Attractions <span class="caret"></span></a>
+      <ul class="dropdown-menu">
+        <li><%= link_to('See All Attractions', attractions_path) %></li>
+        <li><%= link_to('New Attraction', new_attraction_path) %></li>
+      </ul>
+      
+    <li role="presentation" class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Your Account <span class="caret"></span></a>
       <ul class="dropdown-menu">
         <li><%= link_to('Your Profile', user_path(current_user)) %> </li>
         <li><%= link_to('Edit Your Profile', edit_user_path(current_user)) %> </li>
@@ -49,14 +55,9 @@
       </ul>
     <% end %>
 
-</ul>
+  </ul>
+  <h1> Vacay </h1>
 
-
-
-
-
-
-<h1> Vacay </h1>
   <% if user_signed_in? %><br>
     You are signed in as <b><%= current_user.email %></b>
   <% end %>
@@ -64,7 +65,6 @@
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
 
-<%= yield %>
-
-</body>
+  <%= yield %>
+  </body>
 </html>

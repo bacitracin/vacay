@@ -6,8 +6,12 @@
   <li><%= link_to trip.trip_nickname, trip_path(trip) %> - <%= link_to trip.user.username, user_path(trip.user) %>'s Trip</li>
 <% end %><br>
 
-
 <h4>Attractions in <%= @destination.city %>:</h4>
 <% @destination.attractions.each do |attraction| %>
-  <li><%= link_to attraction.name, attraction_path(attraction) %>
+  <li><%= link_to attraction.name, attraction_path(attraction) %></li>
 <% end %>
+
+<span class='st_email_large' displayText='Email'></span>
+<span class='st_twitter_large' displayText='Tweet'></span>
+<span class='st_facebook_large' displayText='Facebook'></span>
+<span class='st_pinterest_large' displayText='Pinterest'></span>

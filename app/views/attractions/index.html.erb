@@ -4,5 +4,4 @@
   <ul>
     <li><%= link_to attraction.name, attraction_path(attraction) %> <%= attraction.trips.count %> Trips Saved <%= link_to "Delete", attraction, method: :delete, data: { confirm: "Confirm" } %></li>
   </ul>
-
 <% end %>
