@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-before_action :authenticate_user!, except: [:index, :show] # decide whether to keep this or not
 
   def new
     @user = current_user
@@ -20,7 +19,7 @@ before_action :authenticate_user!, except: [:index, :show] # decide whether to k
      end
   end
 
-  def index # See all members of Vacay
+  def index # See all members 
     @users = User.all
   end
 

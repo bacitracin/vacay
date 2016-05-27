@@ -44,21 +44,18 @@ class AttractionsController < ApplicationController
   def update
     if @attraction.update(attraction_params)
       if (params[:attraction][:destination][:destination_city]) == ""
+        flash[:notice] = "Your attraction needs a destination city"
         render :edit
       else
         @destination = Destination.find_or_create_by(:city => params[:attraction][:destination][:destination_city]) #creating dupe instead of overwriting
         @attraction.destination_id = @destination.id
         @destination.attractions << @attraction
       end
-      if (params[:attraction][:trip][:trip_nickname]) == ""
-        @trip = "N/A" #if there's no trip nickname just have blank for now
-      else
-        @trip = Trip.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname])
-        @trip.destination_id = @destination.id
-        @attraction.trips << @trip
-        flash[:notice] = "Attraction details successfully updated"
-     end
-     redirect_to @attraction
+      @trip = Trip.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname])
+      @trip.destination_id = @destination.id unless @trip.trip_nickname == "N/A"
+      @attraction.trips << @trip unless @trip.trip_nickname == "N/A"
+      flash[:notice] = "Attraction details successfully updated"
+      redirect_to @attraction and return
     else
       flash[:notice] = "Oops something went wrong. Please try again."
       render :edit 
