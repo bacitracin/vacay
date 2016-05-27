@@ -18,26 +18,34 @@
       Trips <span class="caret"></span>
     </a>
     <ul class="dropdown-menu">
-      <li>See All Trips</li>
-      <li>Add a New Trip</li>
+      <li><%= link_to('See All Your Trips', user_trips_path(current_user)) %></li>
+      <li><%= link_to('Add a New Trip', new_user_trip_path(current_user))%> </li>
     </ul>
   <li role="presentation" class="dropdown">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
       Destinations <span class="caret"></span>
     </a>
     <ul class="dropdown-menu">
-      <li>See All Destinations</li>
-      <li>Add a New Destination</li>
+      <li> <%= link_to('See All Destinations', destinations_path) %></li>
+      <li><%= link_to('New Destination', new_destination_path) %> </li>
     </ul>
   <li role="presentation" class="dropdown">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
       Attractions <span class="caret"></span>
     </a>
     <ul class="dropdown-menu">
-      <li>See All Attractions</li>
-      <li>Add a New Attraction</li>
+      <li><%= link_to('See All Attractions', attractions_path) %></li>
+      <li><%= link_to('New Attraction', new_attraction_path) %></li>
     </ul>
     <li role="presentation"><a href="#">Your Profile</a></li>
+    <li role="presentation" class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+        Your Account <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu">
+        <li><%= link_to('Edit Your Profile', edit_user_path(current_user)) %> </li>
+        <li><%= link_to('New Attraction', new_attraction_path) %></li>
+      </ul>
 
 </ul>
 
@@ -56,14 +64,7 @@
 
 <%= yield %>
 
-  <% if user_signed_in? %><br><br>
-  <ul class="nav nav-pills">
-    <%= link_to('Add a New Trip', new_user_trip_path(current_user))%> or <%= link_to('New Destination', new_destination_path) %> or <%= link_to('New Attraction', new_attraction_path) %><br>
- 
-    <%= link_to('See All Destinations', destinations_path) %><br>
-    <%= link_to('See All Attractions', attractions_path) %><br>
-    <%= link_to('See All Your Trips', user_trips_path(current_user)) %><br>
-    <%= link_to('Edit Your Profile', edit_user_path(current_user)) %> <br>
+  <% if user_signed_in? %><br>
     <%= link_to('Log Out', destroy_user_session_path, :method => :delete) %> </ul>
   <% end %>     
  
