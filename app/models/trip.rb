@@ -6,7 +6,7 @@ class Trip < ActiveRecord::Base
   has_many :attractions, :through => :trip_attractions
 
   validates_presence_of :trip_nickname, :destination_id
-  validates_uniqueness_of :trip_nickname #not sure if i want to keep this
+  validates_uniqueness_of :trip_nickname 
 
   #scope :upcoming_trips, -> {where('start_date > ?', Date.today)}
   #scope :past_trips, -> {where('end_date < ?', Date.today)}

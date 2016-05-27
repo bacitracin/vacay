@@ -1,6 +1,6 @@
 class TripsController < ApplicationController
-   before_action :authenticate_user! #check this
-   # trip is nested under user - user/1/trips/4
+   before_action :authenticate_user!
+   before_action :find_trip, only: [:show, :edit, :update, :destroy]
 
   def index #add in these two model methods, # need to work on this
    # if params[:date] == "Upcoming"
@@ -32,26 +32,23 @@ class TripsController < ApplicationController
 
   # All trips are public
   def show
-    @trip = Trip.find_by_id(params[:id])
   end
 
   # Users can only edit their own trips
   def edit
-    if Trip.find_by_id(params[:id]).user_id != current_user.id
+    if @trip.user_id != current_user.id
       flash[:notice] = "Sorry you can only edit your own trips"
       redirect_to user_trips_path(current_user)
     else
-      @trip = Trip.find_by_id(params[:id])
       @destination = Destination.find_by_id(@trip.destination.id)
     end
   end
 
   def update
-    if Trip.find_by_id(params[:id]).user_id != current_user.id
+    if @trip.user_id != current_user.id
       flash[:notice] = "Sorry you can only edit your own trips"
       redirect_to user_trips_path(current_user)
     else
-      @trip = Trip.find_by_id(params[:id])
       @destination = Destination.find_by_id(@trip.destination.id)
       if @trip.update(trip_params)
         @destination = Destination.find_or_create_by(:city => params[:trip][:destination][:destination_city]) #creating dupes is better than changing the entire destination object for everyone 
@@ -65,7 +62,7 @@ class TripsController < ApplicationController
    end
 
   def destroy
-    Trip.find_by_id(params[:id]).destroy 
+    @trip.destroy 
     flash[:notice] = "Trip was deleted" # maybe add in option/error if the trip cannot be found 
     redirect_to user_trips_path(current_user)
   end
@@ -74,6 +71,10 @@ class TripsController < ApplicationController
 
   def trip_params
     params.require(:trip).permit(:trip_nickname, :start_date, :end_date, :destination_city) 
+  end
+
+  def find_trip
+    @trip = Trip.find_by_id(params[:id])
   end
 
 end

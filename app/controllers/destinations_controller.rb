@@ -1,6 +1,8 @@
 class DestinationsController < ApplicationController
+
  before_action :authenticate_user!, except: [:index, :show] 
- # is this the correct before filter I want?
+ before_action :find_destination, only: [:show, :edit, :update, :destroy]
+
 
   def index
     @destinations = Destination.all
@@ -19,18 +21,13 @@ class DestinationsController < ApplicationController
     end
   end
 
-  # Users can see all individual destination pages
   def show 
-    @destination = Destination.find(params[:id])
   end
 
-  # Anybody can edit the spelling of the destination city directly
   def edit
-    @destination = Destination.find(params[:id])
   end
 
   def update
-    @destination = Destination.find(params[:id])
     if @destination.update(destination_params)
       flash[:notice] = "Destination successfully updated"
       redirect_to @destination
@@ -41,7 +38,7 @@ class DestinationsController < ApplicationController
   end
 
   def destroy
-    Destination.find_by_id(params[:id]).destroy #decide if i want to bother updating trips error
+    @destination.destroy
     flash[:notice] = "Destination was deleted" 
     redirect_to destinations_path 
   end
@@ -50,6 +47,10 @@ class DestinationsController < ApplicationController
 
   def destination_params
     params.require(:destination).permit(:city)
+  end
+
+  def find_destination
+    @destination = Destination.find(params[:id])
   end
 
 end
