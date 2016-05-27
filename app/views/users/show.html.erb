@@ -1,10 +1,10 @@
-<b><%= @user.username %>'s Profile Info</b><br><br>
+<b><h3><%= @user.username %>'s Profile Info</h3></b>
 
 <b>Email: </b> <%= @user.email %><br>
 <b>Hometown: </b> <%= @user.hometown %><br>
 <b>Age: </b><%= @user.age %><br>
 <b>Info: </b><%= @user.info %><br><br>
-Upcoming Trips: <br>
+<h4><%= @user.username %>'s Trips: </h4>
 <% @user.trips.each do |trip| %>
   <li><%= link_to trip.trip_nickname, trip_path(trip) %> in <%= link_to trip.destination.city, destination_path(trip.destination) %></li>
 <% end %>
