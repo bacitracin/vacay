@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head>  
+<!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
   <title>Vacay</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+
 
 <h1> Vacay </h1>
   <% if user_signed_in? %><br>
@@ -19,14 +22,15 @@
 <%= yield %>
 
   <% if user_signed_in? %><br><br>
+  <ul class="nav nav-pills">
     <%= link_to('Add a New Trip', new_user_trip_path(current_user))%> or <%= link_to('New Destination', new_destination_path) %> or <%= link_to('New Attraction', new_attraction_path) %><br>
  
     <%= link_to('See All Destinations', destinations_path) %><br>
     <%= link_to('See All Attractions', attractions_path) %><br>
     <%= link_to('See All Your Trips', user_trips_path(current_user)) %><br>
     <%= link_to('Edit Your Profile', edit_user_path(current_user)) %> <br>
-    <%= link_to('Log Out', destroy_user_session_path, :method => :delete) %>      
-  <% end %>
-
+    <%= link_to('Log Out', destroy_user_session_path, :method => :delete) %> </ul>
+  <% end %>     
+ 
 </body>
 </html>

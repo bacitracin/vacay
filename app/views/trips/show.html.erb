@@ -3,6 +3,7 @@
 <h3><b><%= @trip.trip_nickname %></b></h3>
 
 <%= link_to @trip.user.username, user_path(@trip.user) %> is going to 
+
 <% if @trip.destination %>
   <b><%= link_to @trip.destination.city, destination_path(@trip.destination) %></b><br><br>
 <% end %>
