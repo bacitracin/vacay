@@ -3,11 +3,11 @@ class TripsController < ApplicationController
    # trip is nested under user - user/1/trips/4
 
   def index #add in these two model methods, # need to work on this
-    if params[:date] == "Upcoming"
-      @trips = Trip.upcoming_trips
-    elsif params[:date] == "Past"
-      @trips = Trip.past_trips
-    end
+   # if params[:date] == "Upcoming"
+   #   @trips = Trip.upcoming_trips
+   # elsif params[:date] == "Past"
+   #   @trips = Trip.past_trips
+   # end
     @trips = current_user.trips
   end
 
