@@ -1,4 +1,3 @@
-<%= form_for([current_user, @trip]) do |f| %>
 
    <%= f.label :trip_nickname %>
    <%= f.text_field :trip_nickname %><br>
@@ -12,8 +11,5 @@
    <%= f.fields_for :destination do |p| %>
     <%= p.label :destination_city %>
     <%= p.text_field :destination_city %><br> 
-   <% end %>
+    <% end %>
   <%= f.submit %>
-  
-<% end %>
-

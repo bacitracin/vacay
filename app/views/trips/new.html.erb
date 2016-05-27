@@ -8,4 +8,6 @@
 
 <h3>Add a new Trip </h3>
 
-<%= render 'form' %>
+<%= form_for([current_user, @trip]) do |f| %>  
+  <%= render partial: 'form', locals: {f: f} %>
+<% end %>

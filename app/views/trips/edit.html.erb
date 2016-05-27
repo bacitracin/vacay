@@ -1,21 +1,5 @@
 <h2>Edit Your Trip </h2>
 
-<%= form_for(@trip) do |f| %>
-
-   <%= f.label :trip_nickname %>
-   <%= f.text_field :trip_nickname %><br>
-
-   <%= f.label :start_date %>
-   <%= f.date_field :start_date %><br>
-
-   <%= f.label :end_date %>
-   <%= f.date_field :end_date %><br>
-
-   <%= f.fields_for :destination do |p| %>
-    <%= p.label :destination_city %>
-    <%= p.text_field :destination_city %><br> 
-   <% end %>
-
- <%= f.submit %>
+ <%= form_for(@trip) do |f| %>  
+   <%= render partial: 'form', locals: {f: f} %>
  <% end %>
-
