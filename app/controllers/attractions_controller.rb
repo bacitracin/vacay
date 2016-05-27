@@ -1,5 +1,7 @@
 class AttractionsController < ApplicationController
 
+  before_action :find_attraction, only: [:show, :edit, :update, :destroy]
+
   def index
     @attractions = Attraction.all
   end
@@ -34,49 +36,37 @@ class AttractionsController < ApplicationController
   end
 
   def show
-    @attraction = Attraction.find_by_id(params[:id])
   end
 
   def edit
-    @attraction = Attraction.find_by_id(params[:id])
-    @destination = @attraction.destination
   end
   
   def update
-    @attraction = Attraction.find_by_id(params[:id])
-    @destination = @attraction.destination
     if @attraction.update(attraction_params)
-      @destination = Destination.find_or_create_by(:city => params[:attraction][:destination][:destination_city]) #creating dupe instead of overwriting
-      @attraction.destination_id = @destination.id
-      @destination.attractions << @attraction
+      if (params[:attraction][:destination][:destination_city]) == ""
+        render :edit
+      else
+        @destination = Destination.find_or_create_by(:city => params[:attraction][:destination][:destination_city]) #creating dupe instead of overwriting
+        @attraction.destination_id = @destination.id
+        @destination.attractions << @attraction
+      end
       if (params[:attraction][:trip][:trip_nickname]) == ""
         @trip = "N/A" #if there's no trip nickname just have blank for now
       else
         @trip = Trip.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname])
-       @trip.destination_id = @destination.id
-       @attraction.trips << @trip
-       flash[:notice] = "Attraction details successfully updated"
-       redirect_to @attraction
+        @trip.destination_id = @destination.id
+        @attraction.trips << @trip
+        flash[:notice] = "Attraction details successfully updated"
      end
+     redirect_to @attraction
     else
       flash[:notice] = "Oops something went wrong. Please try again."
       render :edit 
     end
   end
 
-
-  #### CHECK THIS #####
-  def set_trip
-    @attraction = Attraction.find_by_id(params[:id])
-    @destination = @attraction.destination
-    @trip = Trip.find_or_create_by(params[:trip])
-    @trip.destination_id = @destination.id
-    @trip.attractions << @attraction
-    redirect_to @trip
-  end
-
   def destroy
-    Attraction.find_by_id(params[:id]).destroy
+    @attraction.destroy
     flash[:notice] = "Attraction was deleted"
     redirect_to user_trips_path(current_user)
   end
@@ -85,6 +75,11 @@ class AttractionsController < ApplicationController
 
   def attraction_params
     params.require(:attraction).permit(:name, :url, :attraction_type, :destination_city, :trip_nickname)
+  end
+
+  def find_attraction
+    @attraction = Attraction.find_by_id(params[:id])
+    @destination = @attraction.destination
   end
 
 end
