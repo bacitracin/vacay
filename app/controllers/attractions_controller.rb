@@ -11,28 +11,25 @@ class AttractionsController < ApplicationController
   end
 
   def create
-    if (params[:attraction][:destination][:destination_city]) == ""
-     # @attraction = Attraction.create(attraction_params) 
-     # @trip = current_user.trips.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname])
-      render :new
+    @attraction = Attraction.create(attraction_params)
+    @destination = Destination.find_or_create_by(:city => params[:attraction][:destination][:destination_city])
+    @attraction.destination = @destination
+   
+    if (params[:attraction][:trip][:trip_nickname]) == ""
+      @trip = "N/A" #if there's no trip nickname just have it be N/A. Don't save a trip
     else
-      @destination = Destination.find_or_create_by(:city => params[:attraction][:destination][:destination_city])
-      @attraction = @destination.attractions.create(attraction_params) #not sure if i want to change this to get rid of dupe
-      if (params[:attraction][:trip][:trip_nickname]) == ""
-        @trip = "N/A" #if there's no trip nickname just have it blank. Don't save
-      else
-        @trip = current_user.trips.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname])
-        @trip.destination = @destination
-        @destination.trips << @trip
-        @attraction.trips << @trip
-      end
-      
-      if @attraction.valid?
-        redirect_to @attraction
-      else
-        render :new
-      end
+      @trip = current_user.trips.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname])
+      @trip.destination = @destination
+      @attraction.trips << @trip
     end
+      
+    if @attraction.valid?
+      @attraction.save
+      redirect_to @attraction
+    else
+      render :new
+    end
+
   end
 
   def show
@@ -43,23 +40,25 @@ class AttractionsController < ApplicationController
   
   def update
     if @attraction.update(attraction_params)
-      if (params[:attraction][:destination][:destination_city]) == ""
-       # flash[:notice] = "Your attraction needs a destination city"
-        render :edit
+      @destination = Destination.find_or_create_by(:city => params[:attraction][:destination][:destination_city]) #creating dupe instead of overwriting
+      @attraction.destination = @destination
+      
+      if (params[:attraction][:trip][:trip_nickname]) == "" || (params[:attraction][:trip][:trip_nickname]) == "N/A"
+        @trip = "N/A"
       else
-        @destination = Destination.find_or_create_by(:city => params[:attraction][:destination][:destination_city]) #creating dupe instead of overwriting
-        @attraction.destination_id = @destination.id
-        @destination.attractions << @attraction
+        @trip = current_user.trips.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname])
+        @trip.destination = @destination
+        @attraction.trips << @trip
       end
-      @trip = Trip.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname])
-      @trip.destination_id = @destination.id unless @trip.trip_nickname == "N/A"
-      @attraction.trips << @trip
+       
+      @attraction.save
       flash[:notice] = "Attraction details successfully updated"
-      return attractions_path(@attraction)
+      redirect_to @attraction
     else
-      flash[:notice] = "Oops something went wrong. Please try again."
-      render :edit 
+      flash[:notice] = "Something went wrong. Please try again."
+      render :edit
     end
+
   end
 
   def destroy
