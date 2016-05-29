@@ -1,29 +1,25 @@
 class UsersController < ApplicationController
 
-  def new
-    @user = current_user
-  end
-
+  before_action :set_user, only: [:edit, :update]
+  
   def edit
-    @user = current_user
   end
 
   def update
-    @user = current_user
     if @user.update(user_params)
        flash[:notice] = "User profile successfully updated"
        redirect_to @user
      else
-       render :edit 
        flash[:notice] = "Oops something went wrong. Please try again."
+       render :edit 
      end
   end
 
-  def index # See all members 
+  def index
     @users = User.all
   end
 
-  def show  # User profile pages
+  def show 
     @user = User.find(params[:id])
   end 
 
@@ -31,6 +27,10 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:username, :age, :hometown, :info, :email, :password, :password_confirmation) 
+  end
+
+  def set_user
+    @user = current_user
   end
 
 end

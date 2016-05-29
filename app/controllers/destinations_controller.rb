@@ -1,8 +1,6 @@
 class DestinationsController < ApplicationController
 
- before_action :authenticate_user!, except: [:index, :show] 
  before_action :find_destination, only: [:show, :edit, :update, :destroy]
-
 
   def index
     @destinations = Destination.all
@@ -14,11 +12,13 @@ class DestinationsController < ApplicationController
 
   def create
     @destination = Destination.find_or_create_by(destination_params) 
+
     if @destination.valid?
       redirect_to @destination
     else
       render :new
     end
+
   end
 
   def show 
