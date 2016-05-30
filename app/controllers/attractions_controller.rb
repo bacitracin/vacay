@@ -16,7 +16,7 @@ class AttractionsController < ApplicationController
     @attraction.destination = @destination
    
     if (params[:attraction][:trip][:trip_nickname]) == ""
-      @trip = "N/A" #if there's no trip nickname just have it be N/A. Don't save a trip
+      @trip = "N/A" # Don't save trip
     else
       @trip = current_user.trips.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname])
       @trip.destination = @destination
@@ -39,18 +39,19 @@ class AttractionsController < ApplicationController
   end
   
   def update
-    if @attraction.update(attraction_params)
-      @destination = Destination.find_or_create_by(:city => params[:attraction][:destination][:destination_city]) #creating dupe instead of overwriting
-      @attraction.destination = @destination
-      
-      if (params[:attraction][:trip][:trip_nickname]) == "" || (params[:attraction][:trip][:trip_nickname]) == "N/A"
-        @trip = "N/A"
-      else
-        @trip = current_user.trips.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname])
-        @trip.destination = @destination
-        @attraction.trips << @trip
-      end
-       
+    @destination = Destination.find_or_create_by(:city => params[:attraction][:destination][:destination_city]) unless (params[:attraction][:destination][:destination_city]) == ""
+    @attraction.update(attraction_params)
+    @attraction.destination = @destination
+
+    if (params[:attraction][:trip][:trip_nickname]) == "" || (params[:attraction][:trip][:trip_nickname]) == "N/A"
+      @trip = "N/A"
+    else
+      @trip = current_user.trips.find_or_create_by(:trip_nickname=> params[:attraction][:trip][:trip_nickname])
+      @trip.destination = @destination
+      @attraction.trips << @trip
+    end
+
+    if @attraction.valid? 
       @attraction.save
       flash[:notice] = "Attraction details successfully updated"
       redirect_to @attraction
