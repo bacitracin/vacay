@@ -5,6 +5,8 @@ class Destination < ActiveRecord::Base
   has_many :attractions
 
   validates_presence_of :city
+  validates :city, format: { with: /\A[a-z0-9\s]+\Z/i,
+    message: "uses letters & spaces only, no special characters or numbers" }
 
   def popularity
     self.trips.count
