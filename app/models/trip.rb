@@ -6,6 +6,7 @@ class Trip < ActiveRecord::Base
   has_many :attractions, :through => :trip_attractions
 
   validates_presence_of :trip_nickname, :destination_id
+  validates :trip_nickname, length: { minimum: 2}
   #validates_uniqueness_of :trip_nickname 
 
   #scope :upcoming_trips, -> {where('start_date > ?', Date.today)}

@@ -5,6 +5,7 @@ class Attraction < ActiveRecord::Base
 
   validates_presence_of :name, :destination_id
   validates_uniqueness_of :name
+  validates :name, length: { minimum: 2}
 
   def destination_city=(city)
     self.destination = Destination.find_or_create_by(city: city)
