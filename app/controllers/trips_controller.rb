@@ -44,7 +44,7 @@ class TripsController < ApplicationController
     else
       find_destination
       if @trip.update(trip_params)
-        #creating dupes is better than changing the entire destination object for everyone
+        # will create dupes instead of changing the destination object for everyone
         @destination = Destination.find_or_create_by(:city => params[:trip][:destination][:destination_city])  
         @trip.destination = @destination
         @destination.trips << @trip
@@ -56,9 +56,14 @@ class TripsController < ApplicationController
    end
 
   def destroy
-    @trip.destroy 
-    flash[:notice] = "Trip was deleted"
-    redirect_to user_trips_path(current_user)
+    if @trip.user_id != current_user.id
+      flash[:notice] = "Sorry you can only delete your own trips"
+      redirect_to user_trips_path(current_user)
+    else
+      @trip.destroy 
+      flash[:notice] = "Trip was deleted"
+      redirect_to user_trips_path(current_user)
+    end
   end
 
   private
