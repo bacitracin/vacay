@@ -8,13 +8,18 @@ class Destination < ActiveRecord::Base
   validates :city, format: { with: /\A[a-z0-9\s]+\Z/i,
     message: "uses letters & spaces only, no special characters or numbers" }
   validates :city, length: { minimum: 2}
-  
+  before_validation :capitalize
+
   def popularity
     self.trips.count
   end
 
   def self.popularity_sort
     Destination.all.sort_by { |destination| destination.popularity}.reverse
+  end
+
+  def capitalize
+    self.city = self.city.titleize
   end
 
 end
