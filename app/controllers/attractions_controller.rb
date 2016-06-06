@@ -51,8 +51,7 @@ class AttractionsController < ApplicationController
       @attraction.trips << @trip
     end
 
-    if @attraction.valid? 
-      @attraction.save
+    if @attraction.save? #changed from valid?
       flash[:notice] = "Attraction details successfully updated"
       redirect_to @attraction
     else
