@@ -22,6 +22,10 @@ class DestinationsController < ApplicationController
   end
 
   def show 
+    respond_to do |f|
+      f.html { render :show }
+      f.json { render json: @destination }
+    end
   end
 
   def edit
