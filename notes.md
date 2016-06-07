@@ -14,6 +14,19 @@ REQUIREMENTS
     -fire an ajax request to get the data for the user's trips
     -place the data in the DOM
 
+    $(function(){
+      $("a.XXXX").on("click", function(event){
+        $.ajax({
+        method: "GET",
+        url: this.href,
+        }).done(function(data){
+        // get response
+        add to the page
+        })
+        event.preventDefault();
+      })
+    })
+
 
 
 3. The rails API must reveal at least one has-many relationship in the JSON that is then rendered to the page.

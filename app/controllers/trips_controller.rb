@@ -17,8 +17,8 @@ class TripsController < ApplicationController
     
     if @trip.valid?
       @trip.save
-      #redirect_to @trip
-      render json: @trip, status: 201
+      redirect_to @trip
+      #render json: @trip, status: 201
     else
      render :new
      end
