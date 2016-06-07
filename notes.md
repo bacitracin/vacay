@@ -8,6 +8,14 @@ REQUIREMENTS
   Attraction_API
   Trip_API
 
+  $("a[href='posts/1/comments']").on("click", function(event){event.preventDefault(); showComments();}) 
+  1. The ability to load the trips for a user index page via AJAX
+    -hijack the click even of the trip link to fire an ajax request   # bind to the event, prevent default
+    -fire an ajax request to get the data for the user's trips
+    -place the data in the DOM
+
+
+
 3. The rails API must reveal at least one has-many relationship in the JSON that is then rendered to the page.
   A trip HAS_MANY attractions
   A user HAS_MANY trips
