@@ -3,6 +3,12 @@ class TripsController < ApplicationController
 
   def index
     @trips = current_user.trips
+
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @trips }
+    end
+
   end
 
   def new
@@ -18,7 +24,9 @@ class TripsController < ApplicationController
     if @trip.valid?
       @trip.save
       redirect_to @trip
-      #render json: @trip, status: 201
+      
+      #added on for jquery bit
+      render json: @trip, status: 201
     else
      render :new
      end

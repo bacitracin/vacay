@@ -19,7 +19,7 @@ REQUIREMENTS
         $.ajax({
         method: "GET",
         url: this.href,
-        }).done(function(data){
+        }).done(function(response){
         // get response
         add to the page
         })
