@@ -2,8 +2,9 @@
 
 <% @trips.each do |trip| %>
   <li><%= link_to trip.trip_nickname, trip_path(trip) %>  <%= link_to "Delete", trip, method: :delete, data: {confirm: "Delete?"} %> 
-    <button class="js-more" data-id="<%= trip.id %>">More info</button>
-    <div class = "trip-info">
-    </div>
-   </li>
+    <%= link_to "More Info", trip_path(trip), :class => "js-more", :remote => true %>
+    </li>
 <% end %>
+
+<div class = "trip-info">
+</div>
