@@ -25,8 +25,6 @@ class TripsController < ApplicationController
       @trip.save
       redirect_to @trip
       
-      #added on for jquery bit
-      render json: @trip, status: 201
     else
      render :new
      end
