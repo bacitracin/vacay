@@ -5,7 +5,7 @@ Simple Rails CRUD app for vacation planning. Track your trips - where, when and 
 
 #### Installation
 
-To install the dependencies please run the following commands: `bundle install`.
+To install the dependencies please run the following command: `bundle install`.
 
 #### Run the app
 
