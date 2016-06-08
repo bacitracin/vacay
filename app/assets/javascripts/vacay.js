@@ -12,10 +12,28 @@
 
 
 // JSON return
+
 $(function(){
   $(".js-more").on("click", function(event){
     event.preventDefault();
 
-    alert("this is working");
+    var tripUrl = (this.href);
+    tripUrl += ".json";
+    var tripInfo = $.get(tripUrl);
+    
+    console.log(tripInfo);
+
   })
 })
+
+function Trip (user_id, destination_id, trip_nickname, start_date, end_date){
+  this.user_id = user_id
+  this.destination_id = destination_id
+  this.trip_nickname = trip_nickname
+  this.start_date = start_date
+  this.end_date = end_date
+}
+
+Trip.prototype.capitalize = function(){
+  
+}
