@@ -1,4 +1,4 @@
 class DestinationSerializer < ActiveModel::Serializer
-  attributes :id, :city
+  attributes :city
 
 end
