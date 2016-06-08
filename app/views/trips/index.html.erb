@@ -4,7 +4,6 @@
   <li><%= link_to trip.trip_nickname, trip_path(trip) %>  -   <%= link_to "Delete", trip, method: :delete, data: {confirm: "Delete?"} %>     -
     <%= link_to "More Info", trip_path(trip), :class => "js-more", :remote => true %>
     </li>
-
 <% end %>
 
 <div class = "trip-info"></div>
