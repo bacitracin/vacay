@@ -4,10 +4,13 @@
 $(function(){
   $(".js-more").on("click", function(event){
     event.preventDefault();
-
+    // this is <a class="js-more" href="/trips/1">More Info</a>
     var tripUrl = (this.href += ".json");
+
     $.get(tripUrl).success(function(response){
-      $("div.trip-info").append(response["trip"]["destination"]["city"]);
+      var tripDiv = "div.trip-info-" + (parseInt(response["trip"]["id"]);
+      var trip = response["trip"]["destination"]["city"];
+      $(tripDiv).append(trip);
     })
   })
 })
