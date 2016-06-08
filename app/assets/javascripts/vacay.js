@@ -11,7 +11,7 @@
 //})
 
 
-// JSON return
+// JSON
 
 $(function(){
   $(".js-more").on("click", function(event){
@@ -22,6 +22,7 @@ $(function(){
     var tripInfo = $.get(tripUrl);
     
     console.log(tripInfo);
+    alert("i'm working");
 
   })
 })
@@ -35,5 +36,5 @@ function Trip (user_id, destination_id, trip_nickname, start_date, end_date){
 }
 
 Trip.prototype.capitalize = function(){
-  
+
 }

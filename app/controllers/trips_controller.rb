@@ -3,11 +3,11 @@ class TripsController < ApplicationController
    before_action :find_trip, only: [:show, :edit, :update, :destroy]
 
   def index
-    @trips = current_user.trips
 
-    respond_to do |format|
-      format.html { render :index }
-      format.json { render json: @trips }
+    if params["user_id"]
+      @trips = current_user.trips
+    else
+      @trips = Trip.all
     end
 
   end
