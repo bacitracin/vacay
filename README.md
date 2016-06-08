@@ -5,7 +5,12 @@ Simple Rails CRUD app for vacation planning. Track your trips - where, when and 
 
 #### Installation
 
-To install the dependencies please run the following command: `bundle install`.
+Fork the repo & clone it down to your local machine. 
+
+Use `bundle install` to install dependencies. 
+
+Use `rake db:create` and `rake db:migrate` to set up the database. There is also a seed file with sample data you can run with `rake db:seed`.
+
 
 #### Run the app
 
