@@ -14,6 +14,7 @@ class DestinationsController < ApplicationController
     @destination = Destination.find_or_create_by(destination_params) 
 
     if @destination.valid?
+      @destination.save 
       redirect_to @destination
     else
       render :new
