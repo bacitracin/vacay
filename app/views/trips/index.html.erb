@@ -1,7 +1,7 @@
 <h3>Your Trips</h3>
 
 <% @trips.each do |trip| %>
-  <li><%= link_to trip.trip_nickname, trip_path(trip) %>  <%= link_to "Delete", trip, method: :delete, data: {confirm: "Delete?"} %> 
+  <li><%= link_to trip.trip_nickname, trip_path(trip) %>  -   <%= link_to "Delete", trip, method: :delete, data: {confirm: "Delete?"} %>     -
     <%= link_to "More Info", trip_path(trip), :class => "js-more", :remote => true %>
     </li>
 
