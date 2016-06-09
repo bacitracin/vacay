@@ -1,12 +1,10 @@
 <h3> Trip Information </h3>
 
-<h3><b><%= @trip.trip_nickname %></b></h3>
+<h3 id="trip-nickname"><b><%= @trip.trip_nickname %></b></h3>
 
 <%= link_to @trip.user.username, user_path(@trip.user) %> is going to 
 
-<% if @trip.destination %>
   <b><%= link_to @trip.destination.city, destination_path(@trip.destination) %></b><br><br>
-<% end %>
 
 <% if @trip.start_date %>
 from <b><%= @trip.start_date %></b> to <b><%= @trip.end_date %></b><br><br>
@@ -14,7 +12,6 @@ from <b><%= @trip.start_date %></b> to <b><%= @trip.end_date %></b><br><br>
 
 <%= link_to "Edit This Trip", edit_trip_path(@trip) %>
 
-<% if @trip.destination %>
 <h3><%= @trip.destination.city%> To Do List</h3>
 
   <% @trip.attractions.each do |attraction| %>
@@ -24,9 +21,11 @@ from <b><%= @trip.start_date %></b> to <b><%= @trip.end_date %></b><br><br>
         <div class="attraction-info-<%= attraction.id %>">
         </div>
     </li>
+    
   <% end %>
+  <br><br>
+  <%= link_to "See Next Trip", trip_path(@trip) %>
 
-<% end %>
 <br><br>
 <span class='st_email_large' displayText='Email'></span>
 <span class='st_twitter_large' displayText='Tweet'></span>
