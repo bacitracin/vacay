@@ -8,9 +8,14 @@ $(function(){
     var tripUrl = (this.href += ".json");
 
     $.get(tripUrl).success(function(response){
-      var tripDiv = "div.trip-info-" + (parseInt(response["trip"]["id"]);
+      var tripDiv = response["trip"]["id"];
+      console.log(tripDiv);
+
       var trip = response["trip"]["destination"]["city"];
-      $(tripDiv).append(trip);
+      console.log(trip);
+
+
+      $('div.trip-info-'+tripDiv).append(trip);
     })
   })
 })
