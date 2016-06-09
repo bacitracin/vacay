@@ -7,23 +7,25 @@ $(function(){
     // this is <a class="js-more" href="/trips/1">More Info</a>
     var tripUrl = (this.href += ".json");
 
+    // AJAX call
     $.get(tripUrl).success(function(response){
-      var tripDiv = response["trip"]["id"];
-      console.log(tripDiv);
+      var tripDiv = 'div.trip-info-' + response["trip"]["id"];
 
-      var trip = response["trip"]["destination"]["city"];
-      console.log(trip);
-
-
-      $('div.trip-info-'+tripDiv).append(trip);
+      var newTripInfo = new Trip(
+        response["trip"]["user_id"],
+        response["trip"]["destination"]["city"],
+        response["trip"]["trip_nickname"],
+        response["trip"]["start_date"],
+        response["trip"]["end_date"]
+        );
+      
+      // Show data
+      $(tripDiv).append(newTripInfo.trip_nickname 
+        + " is in " + newTripInfo.city + " from " + newTripInfo.start_date
+        + " to " + newTripInfo.end_date);
     })
   })
 })
-
-// Add Trip Info
-function addTripInfoToPage(response){
-  $("div.trip-info").append(response["trip"]["destination"]["city"]);
-};
 
 // Trip Constructor
 function Trip(user_id, city, trip_nickname, start_date, end_date){
