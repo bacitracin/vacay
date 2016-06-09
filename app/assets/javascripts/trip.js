@@ -8,12 +8,17 @@ function Trip(user_id, city, trip_nickname, start_date, end_date){
 
   // Finish this method - Lets you know if the trip is upcoming or past
   this.countdown = function(){
-    var todayDate = new Date();
-    if(start_date.getTime() > todayDate.getTime()){
-      return "This trip is coming up";
+    var today = new Date();
+    var parsedToday = Date.parse(today);
+    var parsedStartDate = Date.parse(start_date);
+    var parsedEndDate = Date.parse(end_date);
+    if(parsedStartDate > parsedToday) {
+      return "This trip is coming up. Time to pack!";
     }
-    else {
-      return "This trip has already passed";
+    else if(parsedEndDate < parsedToday) {
+      return "This trip has passed. That was fun.";
+    } else {
+      return "This trip is in progress. Have fun!";
     }
   };
 }
@@ -38,7 +43,8 @@ $(function(){
         );
       
       // Show data in the div
-      $(tripDiv).html("<ul>" + "<li>" + "City: " + newTripInfo.city+ "</li>"
+      $(tripDiv).html("<ul>" + "<b>" + newTripInfo.countdown() + "</b>"
+        + "<li>" + "City: " + newTripInfo.city+ "</li>"
         + "<li>" + "Start Date: " + newTripInfo.start_date + "</li>"
         + "<li>" + "End Date: " + newTripInfo.end_date + "</li>" 
         + "</ul>"
