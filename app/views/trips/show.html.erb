@@ -18,7 +18,12 @@ from <b><%= @trip.start_date %></b> to <b><%= @trip.end_date %></b><br><br>
 <h3><%= @trip.destination.city%> To Do List</h3>
 
   <% @trip.attractions.each do |attraction| %>
-    <li><%= link_to attraction.name, attraction %>, <%= attraction.attraction_type %></li>
+    <li><%= link_to attraction.name, attraction %>, <%= attraction.attraction_type %>
+      
+      <%= link_to "More Info", attraction_path(attraction), :class => "js-more-attraction"%>
+        <div class="attraction-info-<%= attraction.id %>">
+        </div>
+    </li>
   <% end %>
 
 <% end %>
