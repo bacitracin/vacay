@@ -52,3 +52,39 @@ $(function(){
     })
   })
 })
+
+// Next button
+$(function(){
+  $(".js-next").on("click", function(){
+    var thisTripId= $('#trip-id').text();
+
+    $.get("/trips.json").success(function(response){
+      // List of trip objects
+      var tripList = response["trips"];
+
+      // Find the index of the current trip by comparing with trip id
+      var tripIndex;
+      for(i = 0; i < tripList.length; i++){
+        if (tripList[i]["id"] == thisTripId){
+          tripIndex = i;
+        }
+      }
+
+      // This will be the index for the next trip in the list
+      var nextTripIndex = tripIndex + 1;
+
+      // Find & create the next trip in the list, then use jquery to show it on the page
+      // add option in case it's the last on the array to loop back around to 0
+    })
+  })
+})
+
+// then rotate through the array
+// but also update the next button?
+
+// tripList["trips"] is trip array
+// tripList["trips"][i] is trip
+
+
+
+

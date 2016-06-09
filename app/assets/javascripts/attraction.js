@@ -31,3 +31,5 @@ $(function(){
     })
   })
 })
+
+// Populate City To Do List Div with the Attractions - option

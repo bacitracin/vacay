@@ -2,20 +2,16 @@
 
 <h3 id="trip-nickname"><b><%= @trip.trip_nickname %></b></h3>
 
-<%= link_to @trip.user.username, user_path(@trip.user) %> is going to 
-
-  <b><%= link_to @trip.destination.city, destination_path(@trip.destination) %></b><br><br>
+<%= link_to @trip.user.username, user_path(@trip.user) %> is going to <b id="city"><%= link_to @trip.destination.city, destination_path(@trip.destination) %></b><br><br>
 
 <% if @trip.start_date %>
-from <b><%= @trip.start_date %></b> to <b><%= @trip.end_date %></b><br><br>
+from <b id="start-date"><%= @trip.start_date %></b> to <b id="end-date"><%= @trip.end_date %></b><br><br>
 <% end %>
 
-<%= link_to "Edit This Trip", edit_trip_path(@trip) %>
-
-<h3><%= @trip.destination.city%> To Do List</h3>
+  <h3><span id="city"><%= @trip.destination.city%></span> To Do List</h3>
 
   <% @trip.attractions.each do |attraction| %>
-    <li><%= link_to attraction.name, attraction %>, <%= attraction.attraction_type %>
+    <li><span id="attraction-name"><%= link_to attraction.name, attraction %></span>, <span id="attraction-type"><%= attraction.attraction_type %></span>
       
       <%= link_to "More Info", attraction_path(attraction), :class => "js-more-attraction"%>
         <div class="attraction-info-<%= attraction.id %>">
@@ -25,10 +21,7 @@ from <b><%= @trip.start_date %></b> to <b><%= @trip.end_date %></b><br><br>
   <% end %>
 
   <br><br>
-  <%= link_to "See Next Trip", trip_path(@trip) %>
+  <%= link_to "Next Trip", trip_path(@trip), :class => "js-next"%>
+  <p>Trip number <span id="trip-id"><%= @trip.id %></span></p>
 
-<br><br>
-<span class='st_email_large' displayText='Email'></span>
-<span class='st_twitter_large' displayText='Tweet'></span>
-<span class='st_facebook_large' displayText='Facebook'></span>
-<span class='st_pinterest_large' displayText='Pinterest'></span>
+  
