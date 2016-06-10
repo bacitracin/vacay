@@ -111,7 +111,13 @@ $(function(){
       $("#start-date").text(nextTripInfo.start_date);
       $("#end-date").text(nextTripInfo.end_date);
       $("#trip-id").text(nextTripInfo.trip_id);
-      $("#attractions").text(nextTripInfo.attractions);// not sure if this is right
+
+      $("#attractions").html(""); //clear out the div
+
+      for(i=0; i< nextTripInfo.attractions.length; i++){
+        $("#attractions").append("<li>" + nextTripInfo.attractions[i].name + "," + 
+          nextTripInfo.attractions[i].attraction_type + "," + nextTripInfo.attractions[i].url + "</li>");
+      }
 
     })
   })
