@@ -10,7 +10,7 @@
 from <span id="start-date"><%= @trip.start_date %></span> to <span id="end-date"><%= @trip.end_date %></span><br><br>
 <% end %>
 
-  <h3 id="city"><%= @trip.destination.city%>To Do List</h3>
+  <h3 id="city2"><%= @trip.destination.city%> To Do List</h3>
 
   <% @trip.attractions.each do |attraction| %>
     <li><span id="attraction-name"><%= link_to attraction.name, attraction %></span>, <span id="attraction-type"><%= attraction.attraction_type %></span>
@@ -23,7 +23,7 @@ from <span id="start-date"><%= @trip.start_date %></span> to <span id="end-date"
   <% end %>
 
   <br><br>
-  <%= link_to "Next Trip", trip_path(@trip), :class => "js-next"%>
+  <%= link_to "Be Inspired - Click for the Next Trip", trip_path(@trip), :class => "js-next"%>
   <p>Trip number <span id="trip-id"><%= @trip.id %></span></p>
 
   

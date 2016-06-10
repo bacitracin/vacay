@@ -6,8 +6,10 @@ class TripsController < ApplicationController
 
     if params["user_id"]
       @trips = current_user.trips
+      @possessive = "Your"
     else
       @trips = Trip.all
+      @possessive = "All"
     end
 
     respond_to do |format|

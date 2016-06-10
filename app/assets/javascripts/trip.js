@@ -1,6 +1,6 @@
 // Trip Constructor
-function Trip(user_id, trip_id, city, trip_nickname, start_date, end_date, attractions, array_index=""){
-  this.user_id = user_id;
+function Trip(user, trip_id, city, trip_nickname, start_date, end_date, attractions, array_index=""){
+  this.user = user;
   this.trip_id = trip_id;
   this.city = city;
   this.trip_nickname = trip_nickname;
@@ -26,6 +26,14 @@ function Trip(user_id, trip_id, city, trip_nickname, start_date, end_date, attra
   };
 }
 
+// Attraction Constructor
+function Attraction(attraction_id, name, url, attraction_type){
+  this.attraction_id = attraction_id;
+  this.name = name;
+  this.url = url;
+  this.attraction_type = attraction_type;
+}
+
 // Click on get more info link on the user/trip index page, shows more trip details
 $(function(){
   $(".js-more").on("click", function(event){
@@ -38,7 +46,7 @@ $(function(){
 
       // Use the trip constructor
       var newTripInfo = new Trip(
-        response["trip"]["user_id"],
+        response["trip"]["user"],
         response["trip"]["id"],
         response["trip"]["destination"]["city"],
         response["trip"]["trip_nickname"],
@@ -84,18 +92,22 @@ $(function(){
       // Find & create the next trip in the list, then use jquery to show it on the page
       // Should only be able to cycle between your trips, so no need to change user name
       var nextTripInfo = new Trip(
-        tripList[nextTripIndex]["user_id"],
+        tripList[nextTripIndex]["user"],
         tripList[nextTripIndex]["id"],
         tripList[nextTripIndex]["destination"]["city"],
         tripList[nextTripIndex]["trip_nickname"],
         tripList[nextTripIndex]["start_date"],
         tripList[nextTripIndex]["end_date"],
+        tripList[nextTripIndex]["attractions"],
         nextTripIndex
         );
+   
 
       // Use jQuery to change the values on the page 
+      // add change username
       $("#trip-nickname").text(nextTripInfo.trip_nickname);
       $("#city").text(nextTripInfo.city);
+      $("#city2").text(nextTripInfo.city + " To Do List");
       $("#start-date").text(nextTripInfo.start_date);
       $("#end-date").text(nextTripInfo.end_date);
       $("#trip-id").text(nextTripInfo.trip_id);
