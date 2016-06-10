@@ -1,15 +1,15 @@
 // Trip Constructor
 function Trip(user, trip_id, city, trip_nickname, start_date, end_date, attractions, array_index=""){
-  this.user = user;
+  this.user = user; // user object
   this.trip_id = trip_id;
-  this.city = city;
+  this.city = city; // destination object
   this.trip_nickname = trip_nickname;
   this.start_date = start_date;
   this.end_date = end_date;
   this.attractions = attractions; // array
   this.array_index = array_index;
 
-  // Finish this method - Lets you know if the trip is upcoming or past
+  // Countdown method lets you know if the trip is upcoming or past
   this.countdown = function(){
     var today = new Date();
     var parsedToday = Date.parse(today);
@@ -32,7 +32,7 @@ function Attraction(attraction_id, name, url, attraction_type){
   this.name = name;
   this.url = url;
   this.attraction_type = attraction_type;
-}
+  }
 
 // Click on get more info link on the user/trip index page, shows more trip details
 $(function(){
@@ -103,26 +103,28 @@ $(function(){
         );   
 
       // Use jQuery to change the values on the page 
-      // add change username
-      $("#username").text(nextTripInfo.user.username);
+      $("#username").html("<a href='/users/" + nextTripInfo.user.id + "'>" + nextTripInfo.user.username) + "</a>";
       $("#trip-nickname").text(nextTripInfo.trip_nickname);
-      $("#city").text(nextTripInfo.city);
+      //$("#city").html("<a href='/destinations/" + nextTripInfo.destination.id + "'>" + nextTripInfo.city) + "</a>";
+
+      $("#city").text(nextTripInfo.city) // changes text for now, need to go back and add destination id 
       $("#city2").text(nextTripInfo.city + " To Do List");
       $("#start-date").text(nextTripInfo.start_date);
       $("#end-date").text(nextTripInfo.end_date);
       $("#trip-id").text(nextTripInfo.trip_id);
 
       $("#attractions").html(""); //clear out the div
+      // Iterate over attractions & add to the page
 
       for(i=0; i< nextTripInfo.attractions.length; i++){
-        $("#attractions").append("<li>" + nextTripInfo.attractions[i].name + "," + 
-          nextTripInfo.attractions[i].attraction_type + "," + nextTripInfo.attractions[i].url + "</li>");
+        $("#attractions").append("<li>" 
+          + "<a href='/attractions/" + nextTripInfo.attractions[i]["id"] +  "'>" + nextTripInfo.attractions[i].name + "</a>   -   " 
+          + nextTripInfo.attractions[i].attraction_type + "   -   " 
+          + "<a href='" + nextTripInfo.attractions[i].url + "'> Website </a>" + "</li>");
       }
 
     })
   })
 })
-
-
 
 

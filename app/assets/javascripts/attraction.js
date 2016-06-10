@@ -4,7 +4,6 @@ function Attraction(name, url, city, attraction_type){
   this.url = url;
   this.city = city;
   this.attraction_type = attraction_type;
-  
   // Add a method here
 }
 
@@ -31,5 +30,3 @@ $(function(){
     })
   })
 })
-
-// Populate City To Do List Div with the Attractions - option
