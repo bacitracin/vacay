@@ -1,14 +1,16 @@
 <h3> Trip Information </h3>
+<h3 id= "trip-nickname"><b><%= @trip.trip_nickname %></b></h3>
 
-<h3 id="trip-nickname"><b><%= @trip.trip_nickname %></b></h3>
 
-<%= link_to @trip.user.username, user_path(@trip.user) %> is going to <b id="city"><%= link_to @trip.destination.city, destination_path(@trip.destination) %></b><br><br>
+<%= link_to @trip.user.username, user_path(@trip.user) %> is going to 
+
+<b id="city"><%= link_to @trip.destination.city, destination_path(@trip.destination) %></b><br><br>
 
 <% if @trip.start_date %>
-from <b id="start-date"><%= @trip.start_date %></b> to <b id="end-date"><%= @trip.end_date %></b><br><br>
+from <span id="start-date"><%= @trip.start_date %></span> to <span id="end-date"><%= @trip.end_date %></span><br><br>
 <% end %>
 
-  <h3><span id="city"><%= @trip.destination.city%></span> To Do List</h3>
+  <h3 id="city"><%= @trip.destination.city%>To Do List</h3>
 
   <% @trip.attractions.each do |attraction| %>
     <li><span id="attraction-name"><%= link_to attraction.name, attraction %></span>, <span id="attraction-type"><%= attraction.attraction_type %></span>

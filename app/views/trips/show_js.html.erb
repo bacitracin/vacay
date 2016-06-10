@@ -1,0 +1,13 @@
+<h3> Trip Information </h3>
+
+<h3 id="trip-nickname"><b><%= @trip.trip_nickname %></b></h3>
+
+<%= link_to @trip.user.username, user_path(@trip.user) %> is going to 
+
+  City: <b id="city"></b><br>
+  Start Date: <b id="start-date"></b><br>
+  End Date <b id="end-date"></b><br>
+
+  <h3><span id="city"><%= @trip.destination.city%></span> To Do List</h3>
+
+  
