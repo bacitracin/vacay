@@ -100,11 +100,11 @@ $(function(){
         tripList[nextTripIndex]["end_date"],
         tripList[nextTripIndex]["attractions"],
         nextTripIndex
-        );
-   
+        );   
 
       // Use jQuery to change the values on the page 
       // add change username
+      $("#username").text(nextTripInfo.user.username);
       $("#trip-nickname").text(nextTripInfo.trip_nickname);
       $("#city").text(nextTripInfo.city);
       $("#city2").text(nextTripInfo.city + " To Do List");

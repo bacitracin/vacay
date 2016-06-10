@@ -2,9 +2,9 @@
 <h3 id= "trip-nickname"><b><%= @trip.trip_nickname %></b></h3>
 
 
-<%= link_to @trip.user.username, user_path(@trip.user) %> is going to 
+<p id="username"><%= link_to @trip.user.username, user_path(@trip.user)%></p> is going to 
 
-<b id="city"><%= link_to @trip.destination.city, destination_path(@trip.destination) %></b><br><br>
+<b id="city"><%= link_to @trip.destination.city, destination_path(@trip.destination) %></b><br>
 
 <% if @trip.start_date %>
 from <span id="start-date"><%= @trip.start_date %></span> to <span id="end-date"><%= @trip.end_date %></span><br><br>
