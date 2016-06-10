@@ -1,8 +1,8 @@
 // Trip Constructor
-function Trip(user, trip_id, city, trip_nickname, start_date, end_date, attractions, array_index=""){
+function Trip(user, trip_id, destination, trip_nickname, start_date, end_date, attractions, array_index=""){
   this.user = user; // user object
   this.trip_id = trip_id;
-  this.city = city; // destination object
+  this.destination = destination; // destination object
   this.trip_nickname = trip_nickname;
   this.start_date = start_date;
   this.end_date = end_date;
@@ -48,7 +48,7 @@ $(function(){
       var newTripInfo = new Trip(
         response["trip"]["user"],
         response["trip"]["id"],
-        response["trip"]["destination"]["city"],
+        response["trip"]["destination"],
         response["trip"]["trip_nickname"],
         response["trip"]["start_date"],
         response["trip"]["end_date"],
@@ -57,7 +57,7 @@ $(function(){
 
       // Show data in the div
       $(tripDiv).html("<ul>" + "<b>" + newTripInfo.countdown() + "</b>"
-        + "<li>" + "City: " + newTripInfo.city+ "</li>"
+        + "<li>" + "City: " + newTripInfo.destination.city+ "</li>"
         + "<li>" + "Start Date: " + newTripInfo.start_date + "</li>"
         + "<li>" + "End Date: " + newTripInfo.end_date + "</li>" 
         + "</ul>"
@@ -94,7 +94,7 @@ $(function(){
       var nextTripInfo = new Trip(
         tripList[nextTripIndex]["user"],
         tripList[nextTripIndex]["id"],
-        tripList[nextTripIndex]["destination"]["city"],
+        tripList[nextTripIndex]["destination"],
         tripList[nextTripIndex]["trip_nickname"],
         tripList[nextTripIndex]["start_date"],
         tripList[nextTripIndex]["end_date"],
@@ -105,10 +105,10 @@ $(function(){
       // Use jQuery to change the values on the page 
       $("#username").html("<a href='/users/" + nextTripInfo.user.id + "'>" + nextTripInfo.user.username) + "</a>";
       $("#trip-nickname").text(nextTripInfo.trip_nickname);
-      //$("#city").html("<a href='/destinations/" + nextTripInfo.destination.id + "'>" + nextTripInfo.city) + "</a>";
+      $("#city").html("<a href='/destinations/" + nextTripInfo.destination.id + "'>" + nextTripInfo.destination.city) + "</a>";
 
-      $("#city").text(nextTripInfo.city) // changes text for now, need to go back and add destination id 
-      $("#city2").text(nextTripInfo.city + " To Do List");
+  
+      $("#city2").text(nextTripInfo.destination.city + " To Do List");
       $("#start-date").text(nextTripInfo.start_date);
       $("#end-date").text(nextTripInfo.end_date);
       $("#trip-id").text(nextTripInfo.trip_id);

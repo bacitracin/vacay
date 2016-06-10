@@ -1,3 +1,3 @@
 class AttractionSerializer < ActiveModel::Serializer
-  attributes :name, :url, :id, :attraction_type
+  attributes :id, :name, :url, :attraction_type
 end
