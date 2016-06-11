@@ -24,6 +24,10 @@ class TripsController < ApplicationController
   end
 
   def create
+     @post = Post.create(post_params)
+   end
+
+  def create
     @trip = current_user.trips.build(trip_params)
     # created 'destination_city custom attribute writer' in the trip model
     @destination = Destination.find_or_create_by(:city => params[:trip][:destination][:destination_city]) 
@@ -32,7 +36,6 @@ class TripsController < ApplicationController
     if @trip.valid?
       @trip.save
       redirect_to @trip
-      
     else
      render :new
      end

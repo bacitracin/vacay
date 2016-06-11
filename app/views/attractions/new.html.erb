@@ -10,3 +10,43 @@
 <% end %>
 
 <%= render "form" %>
+
+
+<!-- added 
+<div id="attraction-footer">
+  <h3>Attraction Info</h3>
+
+  <b id="attractionName"></b><br>
+  <b id="attractionUrl"></b><br>
+  <b id="attractionType"></b><br>
+  <b id="attractionCity"></b><br></b><br>
+
+<h4> These people are interested in <b id="attractionName"<h4><br><br>
+
+  <span class='st_email_large' displayText='Email'></span>
+  <span class='st_twitter_large' displayText='Tweet'></span>
+  <span class='st_facebook_large' displayText='Facebook'></span>
+  <span class='st_pinterest_large' displayText='Pinterest'></span>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+  $(function () {
+    $('form').submit(function(event) {
+      event.preventDefault();
+ 
+      var values = $(this).serialize();
+      var posting = $.post('/attractions', values);
+ 
+      posting.done(function(data) {
+        var attraction = data["attraction"];
+        $("#attractionName").text("Name: " + attraction["name"]);
+        $("#attractionUrl").text("Url: " + attraction["url"]);
+        $("#attractionType").text("Attraction Type: "attraction["attraction_type"]);
+        $("#attractionCity").text("City: " + attraction["city"]);
+        $("attraction-footer").show();
+      });
+    });
+  });
+</script>
+
+-->

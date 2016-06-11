@@ -33,3 +33,7 @@ body {
   font-size: 15px;
   margin-top: 30px;
 }
+
+#attraction-info {
+  display: none;
+}

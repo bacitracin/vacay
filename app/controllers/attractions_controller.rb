@@ -25,7 +25,8 @@ class AttractionsController < ApplicationController
       
     if @attraction.valid?
       @attraction.save
-      redirect_to @attraction
+      #redirect_to @attraction
+      render json: @attraction, status: 201
     else
       render :new
     end
