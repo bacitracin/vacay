@@ -4,6 +4,11 @@ class AttractionsController < ApplicationController
 
   def index
     @attractions = Attraction.all
+
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @attractions }
+    end
   end
 
   def new

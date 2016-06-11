@@ -12,7 +12,6 @@
 <%= render "form" %>
 
 
-<!-- added 
 <div id="attraction-footer">
   <h3>Attraction Info</h3>
 
@@ -36,17 +35,16 @@
  
       var values = $(this).serialize();
       var posting = $.post('/attractions', values);
- 
+    
       posting.done(function(data) {
+
         var attraction = data["attraction"];
         $("#attractionName").text("Name: " + attraction["name"]);
         $("#attractionUrl").text("Url: " + attraction["url"]);
         $("#attractionType").text("Attraction Type: "attraction["attraction_type"]);
-        $("#attractionCity").text("City: " + attraction["city"]);
-        $("attraction-footer").show();
+        $("#attractionCity").text("City: " + attraction["destination"]["city"]);
+        //$("attraction-footer").show();
       });
     });
   });
 </script>
-
--->
