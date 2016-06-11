@@ -26,14 +26,6 @@ function Trip(user, trip_id, destination, trip_nickname, start_date, end_date, a
   };
 }
 
-// Attraction Constructor
-function Attraction(attraction_id, name, url, attraction_type){
-  this.attraction_id = attraction_id;
-  this.name = name;
-  this.url = url;
-  this.attraction_type = attraction_type;
-  }
-
 // Click on get more info link on the user/trip index page, shows more trip details
 $(function(){
   $(".js-more").on("click", function(event){
@@ -117,10 +109,19 @@ $(function(){
       // Iterate over attractions & add to the page
 
       for(i=0; i< nextTripInfo.attractions.length; i++){
+       
+        var newAttraction = new Attraction(
+          nextTripInfo.attractions[i]["id"],
+          nextTripInfo.attractions[i]["name"],
+          nextTripInfo.attractions[i]["url"],
+          nextTripInfo.attractions[i]["attraction_type"],
+          nextTripInfo.attractions[i]["destination"]
+          );
+        //newAttractionID is messed up
         $("#attractions").append("<li>" 
-          + "<a href='/attractions/" + nextTripInfo.attractions[i]["id"] +  "'>" + nextTripInfo.attractions[i].name + "</a>   -   " 
-          + nextTripInfo.attractions[i].attraction_type + "   -   " 
-          + "<a href='" + nextTripInfo.attractions[i].url + "'> Website </a>" + "</li>");
+          + "<a href='/attractions/" + newAttraction.id +  "'>" + newAttraction.name + "</a>   -   " 
+          + newAttraction.attraction_type + "   -   " 
+          + "<a href='" + newAttraction.url + "'> Website </a>" + "</li>");
       }
 
     })
