@@ -7,6 +7,17 @@ function Attraction(id, name, url, attraction_type, destination){
   this.destination = destination;
 }
 
-Attraction.prototype.method = function(){
-  
-}
+// Not currently working
+// Attraction.prototype.formatUrl = function(){
+//  if url.includes("http"){
+//    return url;
+//  }
+//  else if url.includes("www."){
+//    return "http://" + url; 
+//  }
+//  else {
+//    return "http://www." + url;
+//  }
+//}
+
+// Post attraction - id, url, name, attraction_type, destination, trip

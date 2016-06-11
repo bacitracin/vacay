@@ -119,7 +119,6 @@ $(function(){
           nextTripInfo.attractions[i]["attraction_type"],
           nextTripInfo.attractions[i]["destination"]
           );
-
         // Attraction append
         $("#attractions").append("<li>" 
           + "<a href='/attractions/" + newAttraction.id +  "'>" + newAttraction.name + "</a>   -   " 
@@ -129,5 +128,3 @@ $(function(){
     })
   })
 })
-
-
