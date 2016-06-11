@@ -8,25 +8,27 @@ function Trip(user, trip_id, destination, trip_nickname, start_date, end_date, a
   this.end_date = end_date;
   this.attractions = attractions; // array
   this.array_index = array_index;
-
-  // Countdown method lets you know if the trip is upcoming or past
-  this.countdown = function(){
-    var today = new Date();
-    var parsedToday = Date.parse(today);
-    var parsedStartDate = Date.parse(start_date);
-    var parsedEndDate = Date.parse(end_date);
-    if(parsedStartDate > parsedToday) {
-      return "This trip is coming up. Time to pack!";
-    }
-    else if(parsedEndDate < parsedToday) {
-      return "This trip has passed. That was fun.";
-    } else {
-      return "This trip is in progress. Have fun!";
-    }
-  };
 }
 
-// Click on get more info link on the user/trip index page, shows more trip details
+// Countdown method lets you know if the trip is upcoming or past
+Trip.prototype.countdown = function (){
+  var today = new Date();
+  var parsedToday = Date.parse(today);
+  var parsedStartDate = Date.parse(this.start_date);
+  var parsedEndDate = Date.parse(this.end_date);
+
+  if (parsedStartDate > parsedToday) {
+    return "This trip is coming up. Time to pack!";
+  } 
+  else if (parsedEndDate < parsedToday) {
+    return "This trip has passed. That was fun.";
+  } 
+  else {
+    return "This trip is in progress. Have fun!";
+  }
+}
+
+// Click on "More info" ink on the trip index page, shows more trip details
 $(function(){
   $(".js-more").on("click", function(event){
     event.preventDefault();
@@ -36,7 +38,7 @@ $(function(){
     $.get(this.href + ".json").success(function(response){
       var tripDiv = 'div.trip-info-' + response["trip"]["id"];
 
-      // Use the trip constructor
+      // Use the Trip constructor
       var newTripInfo = new Trip(
         response["trip"]["user"],
         response["trip"]["id"],
@@ -47,7 +49,7 @@ $(function(){
         response["trip"]["attractions"]
         );
 
-      // Show data in the div
+      // Show trip data in the div
       $(tripDiv).html("<ul>" + "<b>" + newTripInfo.countdown() + "</b>"
         + "<li>" + "City: " + newTripInfo.destination.city+ "</li>"
         + "<li>" + "Start Date: " + newTripInfo.start_date + "</li>"
@@ -58,13 +60,15 @@ $(function(){
   })
 })
 
-// Next button
+// Next button on the Show page
 $(function(){
   $(".js-next").on("click", function(event){
     event.preventDefault();
+
     var thisTripId= $('#trip-id').text();
 
     $.get("/trips.json").success(function(response){
+      
       // List of trip objects
       var tripList = response["trips"];
 
@@ -77,6 +81,7 @@ $(function(){
       }
       // This will be the index for the next trip in the list
       var nextTripIndex = tripIndex + 1;
+
       if (nextTripIndex == tripList.length){ //if you get to the end of the line reset the tripindex
         nextTripIndex = 0;
       }
@@ -98,18 +103,15 @@ $(function(){
       $("#username").html("<a href='/users/" + nextTripInfo.user.id + "'>" + nextTripInfo.user.username) + "</a>";
       $("#trip-nickname").text(nextTripInfo.trip_nickname);
       $("#city").html("<a href='/destinations/" + nextTripInfo.destination.id + "'>" + nextTripInfo.destination.city) + "</a>";
-
-  
       $("#city2").text(nextTripInfo.destination.city + " To Do List");
       $("#start-date").text(nextTripInfo.start_date);
       $("#end-date").text(nextTripInfo.end_date);
       $("#trip-id").text(nextTripInfo.trip_id);
 
-      $("#attractions").html(""); //clear out the div
+      $("#attractions").html(""); // Clear out the div
       // Iterate over attractions & add to the page
 
       for(i=0; i< nextTripInfo.attractions.length; i++){
-       
         var newAttraction = new Attraction(
           nextTripInfo.attractions[i]["id"],
           nextTripInfo.attractions[i]["name"],
@@ -117,13 +119,13 @@ $(function(){
           nextTripInfo.attractions[i]["attraction_type"],
           nextTripInfo.attractions[i]["destination"]
           );
-        //newAttractionID is messed up
+
+        // Attraction append
         $("#attractions").append("<li>" 
           + "<a href='/attractions/" + newAttraction.id +  "'>" + newAttraction.name + "</a>   -   " 
           + newAttraction.attraction_type + "   -   " 
           + "<a href='" + newAttraction.url + "'> Website </a>" + "</li>");
       }
-
     })
   })
 })
