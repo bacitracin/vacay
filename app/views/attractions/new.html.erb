@@ -20,7 +20,7 @@
   <b id="attractionType"></b><br>
   <b id="attractionCity"></b><br></b><br>
 
-<h4> These people are interested in <b id="attractionName"<h4><br><br>
+<h4> These people are interested in <b id="attractionName2":<h4><br><br>
 
   <span class='st_email_large' displayText='Email'></span>
   <span class='st_twitter_large' displayText='Tweet'></span>
@@ -35,15 +35,16 @@
  
       var values = $(this).serialize();
       var posting = $.post('/attractions', values);
-    
+     
       posting.done(function(data) {
-
         var attraction = data["attraction"];
-        $("#attractionName").text("Name: " + attraction["name"]);
-        $("#attractionUrl").text("Url: " + attraction["url"]);
-        $("#attractionType").text("Attraction Type: "attraction["attraction_type"]);
-        $("#attractionCity").text("City: " + attraction["destination"]["city"]);
-        //$("attraction-footer").show();
+
+        $("#attractionName").html("Name: " + attraction["name"]);
+        $("#attractionName2").html(attraction["name"]);
+        $("#attractionUrl").html("Website: " + attraction["url"]);
+        $("#attractionType").html("Attraction Type: " + attraction["attraction_type"]);
+        $("#attractionCity").html("City: " + attraction["destination"]["city"]);
+        $("#attraction-footer").css("visibility", "visible");
       });
     });
   });
