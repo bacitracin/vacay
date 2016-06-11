@@ -11,21 +11,19 @@
 
 <%= render "form" %>
 
-
 <div id="attraction-footer">
-  <h3>Attraction Info</h3>
-
+  
+  <h3>Attraction Created!</h3>
   <b id="attractionName"></b><br>
   <b id="attractionUrl"></b><br>
   <b id="attractionType"></b><br>
   <b id="attractionCity"></b><br></b><br>
 
-<h4> These people are interested in <b id="attractionName2":<h4><br><br>
-
   <span class='st_email_large' displayText='Email'></span>
   <span class='st_twitter_large' displayText='Tweet'></span>
   <span class='st_facebook_large' displayText='Facebook'></span>
   <span class='st_pinterest_large' displayText='Pinterest'></span>
+
 </div>
 
 <script type="text/javascript" charset="utf-8">
@@ -37,15 +35,24 @@
       var posting = $.post('/attractions', values);
      
       posting.done(function(data) {
-        var attraction = data["attraction"];
 
-        $("#attractionName").html("Name: " + attraction["name"]);
-        $("#attractionName2").html(attraction["name"]);
-        $("#attractionUrl").html("Website: " + attraction["url"]);
-        $("#attractionType").html("Attraction Type: " + attraction["attraction_type"]);
-        $("#attractionCity").html("City: " + attraction["destination"]["city"]);
-        $("#attraction-footer").css("visibility", "visible");
+        var newAttraction = new Attraction(
+          data["attraction"]["id"],
+          data["attraction"]["name"],
+          data["attraction"]["url"],
+          data["attraction"]["attraction_type"],
+          data["attraction"]["destination"]
+          );
+
+        $("#attractionName").html("Name: " + "<a href='/attractions/" + newAttraction.id + "'>" + newAttraction["name"] + "</a>");
+        $("#attractionName2").html(newAttraction["name"]);
+        $("#attractionUrl").html("<a href='" + newAttraction.formatUrl() + "'>" + "Website");
+        $("#attractionType").html("Attraction Type: " + newAttraction["attraction_type"]);
+        $("#attractionCity").html("City: " + "<a href='/destinations/" + newAttraction["destination"]["id"] + "'>" + newAttraction["destination"]["city"] + "</a>" );
+
+        $("#attraction-footer").css("visibility", "visible"); // show the attraction
       });
     });
   });
 </script>
+

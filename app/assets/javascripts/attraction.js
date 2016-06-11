@@ -7,17 +7,15 @@ function Attraction(id, name, url, attraction_type, destination){
   this.destination = destination;
 }
 
-// Not currently working
-// Attraction.prototype.formatUrl = function(){
-//  if url.includes("http"){
-//    return url;
-//  }
-//  else if url.includes("www."){
-//    return "http://" + url; 
-//  }
-//  else {
-//    return "http://www." + url;
-//  }
-//}
-
-// Post attraction - id, url, name, attraction_type, destination, trip
+Attraction.prototype.formatUrl = function(){
+  var origUrl = this.url;
+  if (origUrl.includes("http")){
+    return origUrl;
+  }
+  else if (origUrl.includes("www.")){
+    return "http://" + origUrl; 
+  }
+  else {
+    return "http://www." + origUrl; 
+  }
+}
