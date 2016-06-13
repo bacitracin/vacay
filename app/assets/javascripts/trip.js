@@ -49,7 +49,6 @@ $(function(){
         response["trip"]["attractions"]
         );
 
-      $(tripDiv).toggle();
       // Show trip data in the div
       $(tripDiv).html("<ul>" + "<b>" + newTripInfo.countdown() + "</b>"
         + "<li>" + "City: " + newTripInfo.destination.city+ "</li>"
@@ -57,6 +56,7 @@ $(function(){
         + "<li>" + "End Date: " + newTripInfo.end_date + "</li>" 
         + "</ul>"
         );
+      $(tripDiv).toggle();
     })
   })
 })
