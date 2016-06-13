@@ -36,7 +36,7 @@ $(function(){
 
     // AJAX call
     $.get(this.href + ".json").success(function(response){
-      var tripDiv = 'div.trip-info-' + response["trip"]["id"];
+      var tripDiv = '#trip-info-' + response["trip"]["id"];
 
       // Use the Trip constructor
       var newTripInfo = new Trip(
@@ -56,7 +56,8 @@ $(function(){
         + "<li>" + "End Date: " + newTripInfo.end_date + "</li>" 
         + "</ul>"
         );
-      $(tripDiv).toggle();
+
+      $(tripDiv).toggle(); // Figure out what's up with the double click
     })
   })
 })
