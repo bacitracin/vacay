@@ -9,7 +9,9 @@
       </ul>
 <% end %>
 
+<div id = "new-attraction-form">
 <%= render "form" %>
+</div>
 
 <div id="attraction-footer">
   
@@ -34,7 +36,7 @@
       var values = $(this).serialize();
       var posting = $.post('/attractions', values);
      
-      posting.done(function(data) {
+     posting.done(function(data) {
         var newAttraction = new Attraction(
           data["attraction"]["id"],
           data["attraction"]["name"],
@@ -42,6 +44,8 @@
           data["attraction"]["attraction_type"],
           data["attraction"]["destination"]
           );
+
+        // Set url to include http://www.
         var formattedUrl = newAttraction.formatUrl();
         newAttraction["url"] = formattedUrl;
 
@@ -50,7 +54,7 @@
         $("#attractionName2").html(newAttraction["name"]);
         $("#attractionType").html("Attraction Type: " + newAttraction["attraction_type"]);
         $("#attractionCity").html("City: " + "<a href='/destinations/" + newAttraction["destination"]["id"] + "'>" + newAttraction["destination"]["city"] + "</a>" );
-        $("#attraction-footer").css("visibility", "visible"); // show the attraction
+       $("#attraction-footer").css("visibility", "visible"); // show the attraction
       });
     });
   });
