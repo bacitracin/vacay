@@ -35,7 +35,6 @@
       var posting = $.post('/attractions', values);
      
       posting.done(function(data) {
-
         var newAttraction = new Attraction(
           data["attraction"]["id"],
           data["attraction"]["name"],
@@ -43,16 +42,16 @@
           data["attraction"]["attraction_type"],
           data["attraction"]["destination"]
           );
+        var formattedUrl = newAttraction.formatUrl();
+        newAttraction["url"] = formattedUrl;
 
         $("#attractionName").html("Name: " + "<a href='/attractions/" + newAttraction.id + "'>" + newAttraction["name"] + "</a>");
+        $("#attractionUrl").html("Website: " + "<a href='" + newAttraction.url + "'>" + newAttraction["url"] + "</a>");
         $("#attractionName2").html(newAttraction["name"]);
-        $("#attractionUrl").html("<a href='" + newAttraction.formatUrl() + "'>" + "Website");
         $("#attractionType").html("Attraction Type: " + newAttraction["attraction_type"]);
         $("#attractionCity").html("City: " + "<a href='/destinations/" + newAttraction["destination"]["id"] + "'>" + newAttraction["destination"]["city"] + "</a>" );
-
         $("#attraction-footer").css("visibility", "visible"); // show the attraction
       });
     });
   });
 </script>
-
