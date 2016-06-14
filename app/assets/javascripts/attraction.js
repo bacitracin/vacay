@@ -9,10 +9,10 @@ function Attraction(id, name, url, attraction_type, destination){
 
 Attraction.prototype.formatUrl = function(){
   var origUrl = this.url;
-  if (origUrl.includes("http")){
+  if (origUrl.includes("http") == true){
     return origUrl;
   }
-  else if (origUrl.includes("www.")){
+  else if (origUrl.includes("www.") == true){
     return "http://" + origUrl; 
   }
   else {
