@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'bootstrap-sass', '~> 3.3.6'
 gem 'active_model_serializers'
 gem 'devise'
 gem 'pry'
