@@ -5,7 +5,7 @@ Simple Rails CRUD app for vacation planning. Track your trips - where, when and 
 
 #### Installation
 
-Fork the repo & clone it down to your local machine. 
+Clone the repo down to your local machine. 
 
 Use `bundle install` to install dependencies. 
 
