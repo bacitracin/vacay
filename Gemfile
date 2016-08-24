@@ -9,10 +9,7 @@ gem 'omniauth-facebook'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'
 # Use postgres for db
-group :development, :test do
-  gem 'sqlite3'
- end
-gem 'pg', group: :production
+gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
