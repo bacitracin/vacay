@@ -4,8 +4,8 @@ class CreateTrips < ActiveRecord::Migration
       t.integer :user_id
       t.string :destination_id
       t.string :trip_nickname
-      t.string :start_date
-      t.string :end_date
+      t.date :start_date
+      t.:date :end_date
       t.integer :trip_attractions
 
       t.timestamps null: false
