@@ -1,4 +1,5 @@
 // Attraction Constructor
+'use strict'
 function Attraction(id, name, url, attraction_type, destination){
   this.id = id;
   this.name = name;
@@ -7,7 +8,7 @@ function Attraction(id, name, url, attraction_type, destination){
   this.destination = destination;
 }
 
-Attraction.prototype.formatUrl = function(){
+Attraction.prototype.formatUrl = function() {
   var origUrl = this.url;
   if (origUrl.includes("http") == true){
     return origUrl;

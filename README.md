@@ -1,9 +1,13 @@
 ### Vacay README
 #### Introduction
 
-Simple Rails CRUD app for vacation planning. Track your trips - where, when and what. Find fun things to do at your destination, or see other users' trips for travel inspiration.
+Rails app for vacation planning. Track your trips - where, when and what. Find fun things to do at your destination, or see other users' trips for travel inspiration.
 
+<<<<<<< HEAD
 Project Blog Post [#1](http://www.tracyctran.com/code/2016/05/30/rails-project-vacay/) & [#2](http://www.tracyctran.com/code/2016/06/13/jquery-project-vacay/)
+=======
+Blog Post [#1](http://www.tracyctran.com/code/2016/05/30/rails-project-vacay/) & [#2](http://www.tracyctran.com/code/2016/06/13/jquery-project-vacay/)
+>>>>>>> 3877e33c767f26ad0594d4dbcecd559373d9fdae
 
 #### Installation
 
